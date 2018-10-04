@@ -40,3 +40,12 @@ hs_err_pid*.log
 # System ignore
 .DS_Store
 Thumbs.db
+
+# Temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+*.orig
+
