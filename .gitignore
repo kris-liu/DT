@@ -19,5 +19,24 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# JVM crash logs
+hs_err_pid*.log
+
+# Eclipse project files
+.project
+.classpath
+.settings
+
+# IntelliJ IDEA project files and directories
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Build targets
+/target
+*/target
+
+# System ignore
+.DS_Store
+Thumbs.db
