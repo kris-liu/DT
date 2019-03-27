@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.blogxin</groupId>
-    <artifactId>dt</artifactId>
+    <artifactId>dt-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
-    <description>Distributed Transaction Framework</description>
+    <description>Distributed Transaction</description>
     <url>https://github.com/kris-liu/DT</url>
 
     <modules>
