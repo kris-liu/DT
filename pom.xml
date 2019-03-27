@@ -16,6 +16,7 @@
     <modules>
         <module>dt-admin</module>
         <module>dt-client</module>
+        <module>dt-demo</module>
     </modules>
 
     <properties>
