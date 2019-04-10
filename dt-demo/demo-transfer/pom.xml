@@ -7,9 +7,9 @@
 		<artifactId>dt-demo</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>demo-account</artifactId>
+	<artifactId>demo-transfer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo-account</name>
+	<name>demo-transfer</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>

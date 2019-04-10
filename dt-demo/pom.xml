@@ -13,22 +13,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo-common</module>
+        <module>demo-account</module>
+        <module>demo-coupon</module>
+        <module>demo-pay</module>
+        <module>demo-transfer</module>
     </modules>
-
-    <properties>
-        <springboot.version>2.0.8.RELEASE</springboot.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${springboot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
