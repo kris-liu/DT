@@ -1,9 +1,14 @@
-package cn.blogxin;
+package cn.blogxin.account;
 
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author xin
+ */
 @SpringBootApplication
+@EnableDubbo(scanBasePackages = "cn.blogxin.account.dubbo")
 public class DemoAccountApplication {
 
 	public static void main(String[] args) {
