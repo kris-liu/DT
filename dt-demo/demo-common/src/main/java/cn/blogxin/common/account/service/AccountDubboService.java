@@ -1,11 +1,11 @@
-package cn.blogxin.account.service;
+package cn.blogxin.common.account.service;
 
 import cn.blogxin.common.account.dto.AccountDTO;
 
 /**
  * @author kris
  */
-public interface AccountService {
+public interface AccountDubboService {
 
     boolean transferIn(AccountDTO accountDTO);
 

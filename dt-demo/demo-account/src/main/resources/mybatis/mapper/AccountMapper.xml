@@ -15,19 +15,19 @@
 
     <select id="query" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM order_info
-        WHERE order_id = #{orderId}
+          <include refid="Base_Column_List"/>
+        FROM account
+        WHERE uid = #{uid}
     </select>
 
     <update id="freeze" parameterType="AccountPO">
-       UPDATE
-        account
-       SET 
-       	available_amount = available_amount - #{amount},
-       	freeze_amount = freeze_amount + #{amount}
-       WHERE 
-        uid = #{uid} and available_amount >= #{amount}
+        UPDATE
+          account
+        SET
+          available_amount = available_amount - #{amount},
+          freeze_amount = freeze_amount + #{amount}
+        WHERE
+          uid = #{uid} and available_amount >= #{amount}
     </update>
 
 </mapper>

@@ -1,4 +1,4 @@
-package cn.blogxin.common.dto;
+package cn.blogxin.common.account.dto;
 
 /**
  * @author kris
