@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.blogxin.account.mapper.AccountMapper">
+
+    <resultMap id="BaseResultMap" type="cn.blogxin.account.entity.AccountPO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="available_amount" property="availableAmount" jdbcType="BIGINT"/>
+        <result column="freeze_amount" property="freezeAmount" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, uid, available_amount, freeze_amount
+    </sql>
+
+    <select id="query" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM order_info
+        WHERE order_id = #{orderId}
+    </select>
+
+    <update id="freeze" parameterType="AccountPO">
+       UPDATE
+        account
+       SET 
+       	available_amount = available_amount - #{amount},
+       	freeze_amount = freeze_amount + #{amount}
+       WHERE 
+        uid = #{uid} and available_amount >= #{amount}
+    </update>
+
+</mapper>
