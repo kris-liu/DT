@@ -23,8 +23,11 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public boolean freeze(CouponDTO couponDTO) {
-        Preconditions.checkArgument(couponMapper.freeze(couponDTO.getUid(), couponDTO.getCouponId(), CouponStatus.INIT.value(), CouponStatus.FREEZE.value(), couponDTO.getOrderId()) == 1, "冻结失败");
-        return true;
+        Coupon coupon = couponMapper.queryForUpdate(couponDTO.getUid(), couponDTO.getCouponId());
+        if (coupon.getAmount() != couponDTO.getAmount()) {
+            return false;
+        }
+        return couponMapper.freeze(coupon.getUid(), coupon.getCouponId(), CouponStatus.INIT.value(), CouponStatus.FREEZE.value(), couponDTO.getOrderId()) == 1;
     }
 
     @Override

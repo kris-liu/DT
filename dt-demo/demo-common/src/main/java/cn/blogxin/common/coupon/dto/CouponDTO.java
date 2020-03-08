@@ -14,4 +14,6 @@ public class CouponDTO {
 
     private String couponId;
 
+    private long amount;
+
 }

@@ -14,6 +14,8 @@ public class Coupon {
 
     private String couponId;
 
+    private long amount;
+
     private int status;
 
     private String orderId;

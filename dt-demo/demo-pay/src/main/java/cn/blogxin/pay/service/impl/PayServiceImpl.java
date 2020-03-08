@@ -72,6 +72,7 @@ public class PayServiceImpl implements PayService {
         couponDTO.setOrderId(payOrder.getOrderId());
         for (PayChannel channel : channels) {
             if (channel.getChannelId() == PayChannelEnum.COUPON.value()) {
+                couponDTO.setAmount(channel.getAmount());
                 couponDTO.setCouponId(channel.getAssetsId());
             }
         }

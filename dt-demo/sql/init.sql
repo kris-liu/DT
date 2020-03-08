@@ -30,6 +30,7 @@ create table coupon (
    `uid` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '用户ID',
    `coupon_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '券ID',
    `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
+   `amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '券面额',
    `orderId` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '交易流水ID',
    PRIMARY KEY (`id`),
    UNIQUE KEY `uk_coupon_id` (`coupon_id`)
