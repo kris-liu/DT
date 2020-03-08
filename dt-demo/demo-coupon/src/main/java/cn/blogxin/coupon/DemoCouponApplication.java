@@ -1,4 +1,4 @@
-package cn.blogxin;
+package cn.blogxin.coupon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

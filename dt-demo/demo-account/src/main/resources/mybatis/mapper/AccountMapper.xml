@@ -15,9 +15,11 @@
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-        <include refid="baseColumnList"/>
-        FROM account
-        WHERE uid = #{uid}
+          <include refid="baseColumnList"/>
+        FROM
+          account
+        WHERE
+          uid = #{uid}
     </select>
 
     <update id="freeze">
@@ -32,21 +34,21 @@
 
     <update id="commit">
         UPDATE
-        account
+          account
         SET
-        freeze_amount = freeze_amount - #{amount}
+          freeze_amount = freeze_amount - #{amount}
         WHERE
-        uid = #{uid} and freeze_amount >= #{amount}
+          uid = #{uid} and freeze_amount >= #{amount}
     </update>
 
     <update id="unfreeze">
         UPDATE
-        account
+          account
         SET
-        available_amount = available_amount + #{amount},
-        freeze_amount = freeze_amount - #{amount}
+          available_amount = available_amount + #{amount},
+          freeze_amount = freeze_amount - #{amount}
         WHERE
-        uid = #{uid} and freeze_amount >= #{amount}
+          uid = #{uid} and freeze_amount >= #{amount}
     </update>
 
 </mapper>

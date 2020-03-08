@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface AccountFlowMapper {
-    void insertFlow(AccountFlow accountFlow);
+
+    void insert(AccountFlow accountFlow);
 
     AccountFlow queryForUpdate(@Param("uid") String uid, @Param("orderId") String orderId);
 
-    int updateStatus(@Param("uid") String uid, @Param("orderId") String orderId, @Param("status") int status);
+    int updateStatus(@Param("uid") String uid, @Param("orderId") String orderId, @Param("currentStatus") int currentStatus, @Param("status") int status);
 
 }

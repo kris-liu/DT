@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(rollbackFor = Exception.class)
     public boolean freeze(AccountDTO accountDTO) {
         AccountFlow accountFlow = initFlow(accountDTO);
-        accountFlowMapper.insertFlow(accountFlow);
+        accountFlowMapper.insert(accountFlow);
         Preconditions.checkArgument(accountMapper.freeze(accountFlow.getUid(), accountFlow.getAmount()) == 1, "冻结金额失败");
         return true;
     }
@@ -49,18 +49,22 @@ public class AccountServiceImpl implements AccountService {
         if (flow.getStatus() == AccountFlowStatus.COMMIT.value()) {
             return true;
         }
-        Preconditions.checkArgument(accountFlowMapper.updateStatus(flow.getUid(), flow.getOrderId(), AccountFlowStatus.COMMIT.value()) == 1, "提交流水失败");
+        Preconditions.checkArgument(accountFlowMapper.updateStatus(flow.getUid(), flow.getOrderId(), AccountFlowStatus.FREEZE.value(), AccountFlowStatus.COMMIT.value()) == 1, "提交流水失败");
         Preconditions.checkArgument(accountMapper.commit(flow.getUid(), flow.getAmount()) == 1, "提交冻结金额失败");
         return true;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean unfreeze(AccountDTO accountDTO) {
         AccountFlow flow = accountFlowMapper.queryForUpdate(accountDTO.getUid(), accountDTO.getOrderId());
+        if (flow == null) {
+            return true;
+        }
         if (flow.getStatus() == AccountFlowStatus.UNFREEZE.value()) {
             return true;
         }
-        Preconditions.checkArgument(accountFlowMapper.updateStatus(flow.getUid(), flow.getOrderId(), AccountFlowStatus.UNFREEZE.value()) == 1, "解冻流水失败");
+        Preconditions.checkArgument(accountFlowMapper.updateStatus(flow.getUid(), flow.getOrderId(), AccountFlowStatus.FREEZE.value(), AccountFlowStatus.UNFREEZE.value()) == 1, "解冻流水失败");
         Preconditions.checkArgument(accountMapper.unfreeze(flow.getUid(), flow.getAmount()) == 1, "解冻冻结金额失败");
         return true;
     }

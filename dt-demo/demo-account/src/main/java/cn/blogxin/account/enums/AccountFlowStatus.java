@@ -7,7 +7,7 @@ public enum AccountFlowStatus {
 
     FREEZE(0),
     COMMIT(1),
-    UNFREEZE(1);
+    UNFREEZE(2);
 
     private int status;
 

@@ -13,12 +13,29 @@ create table account (
 create table account_flow (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
    `uid` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '用户ID',
-   `orderId` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '流水ID',
+   `orderId` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '交易流水ID',
    `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
    `amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '交易金额',
    PRIMARY KEY (`id`),
    UNIQUE KEY `uk_orderId` (`orderId`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='账户流水表';
+
+
+
+
+CREATE DATABASE `coupon` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+use coupon;
+
+create table coupon (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+   `uid` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '用户ID',
+   `coupon_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '券ID',
+   `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
+   `orderId` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '交易流水ID',
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `uk_orderId` (`orderId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='券表';
+
 
 
 

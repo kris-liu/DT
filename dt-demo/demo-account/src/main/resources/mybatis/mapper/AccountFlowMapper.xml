@@ -23,7 +23,7 @@
         uid = #{uid} FOR UPDATE
     </select>
 
-    <insert id="insertFlow">
+    <insert id="insert">
         INSERT INTO
           account_flow
           (uid,order_id,status,amount)
@@ -37,7 +37,7 @@
         SET
           status = #{status}
         WHERE
-          uid = #{uid} and order_id = #{orderId}
+          uid = #{uid} and order_id = #{orderId} and status = #{currentStatus}
     </update>
 
 </mapper>
