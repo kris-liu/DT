@@ -28,7 +28,7 @@
           pay_order
           (uid,order_id,status,amount)
         VALUES
-          (#{order.uid}, #{order.orderId}, #{order.status}, #{order.amount})
+          (#{uid}, #{orderId}, #{status}, #{amount})
     </insert>
 
 </mapper>

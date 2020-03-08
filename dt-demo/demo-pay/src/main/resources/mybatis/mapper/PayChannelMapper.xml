@@ -9,11 +9,11 @@
         <result column="channel_id" property="channelId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="amount" property="amount" jdbcType="BIGINT"/>
-        <result column="assets_id" property="assetsId" jdbcType="VARCHAR"/>
+        <result column="asset_id" property="assetId" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="baseColumnList">
-        id, uid, order_id, channel_id, status, amount, assetsId
+        id, uid, order_id, channel_id, status, amount, asset_id
     </sql>
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
@@ -28,7 +28,7 @@
     <insert id="insert">
         INSERT INTO
           pay_channel
-          (uid,order_id,channel_id,status,amount)
+          (uid,order_id,channel_id,status,amount,asset_id)
         VALUES
         <foreach collection="channels" item="item" index="index" separator=",">
             (#{item.uid},
@@ -36,7 +36,7 @@
             #{item.channelId},
             #{item.status},
             #{item.amount},
-            #{item.assetsId})
+            #{item.assetId})
         </foreach>
     </insert>
 

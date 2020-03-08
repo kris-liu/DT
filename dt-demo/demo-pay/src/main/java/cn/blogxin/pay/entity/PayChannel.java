@@ -20,6 +20,6 @@ public class PayChannel {
 
     private long amount;
 
-    private String assetsId;
+    private String assetId;
 
 }

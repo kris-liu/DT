@@ -16,6 +16,6 @@ public interface PayChannelMapper {
 
     List<PayChannel> query(@Param("uid") String uid, @Param("orderId") String orderId);
 
-    int insert(List<PayChannel> channels);
+    int insert(@Param("channels") List<PayChannel> channels);
 
 }

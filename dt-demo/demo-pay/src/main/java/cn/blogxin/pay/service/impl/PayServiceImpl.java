@@ -40,16 +40,25 @@ public class PayServiceImpl implements PayService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean accountAndCouponPay(PayOrder payOrder, List<PayChannel> channels) {
-        payOrderMapper.insert(payOrder);
-        payChannelMapper.insert(channels);
-
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
-        Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
-        accountDubboService.commit(accountDTO);
-
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
-        Preconditions.checkArgument(couponDubboService.freeze(couponDTO), "券冻结失败");
-        couponDubboService.commit(couponDTO);
+        try {
+            payOrderMapper.insert(payOrder);
+            payChannelMapper.insert(channels);
+
+            Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
+
+            Preconditions.checkArgument(couponDubboService.freeze(couponDTO), "券冻结失败");
+
+//            int i = 10/0;
+
+            accountDubboService.commit(accountDTO);
+            couponDubboService.commit(couponDTO);
+        } catch (Exception e) {
+            accountDubboService.unfreeze(accountDTO);
+            couponDubboService.unfreeze(couponDTO);
+        }
+
         return true;
     }
 
@@ -73,7 +82,7 @@ public class PayServiceImpl implements PayService {
         for (PayChannel channel : channels) {
             if (channel.getChannelId() == PayChannelEnum.COUPON.value()) {
                 couponDTO.setAmount(channel.getAmount());
-                couponDTO.setCouponId(channel.getAssetsId());
+                couponDTO.setCouponId(channel.getAssetId());
             }
         }
         return couponDTO;

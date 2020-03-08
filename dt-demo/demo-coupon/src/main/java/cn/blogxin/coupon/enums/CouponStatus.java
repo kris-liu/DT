@@ -12,11 +12,11 @@ public enum CouponStatus {
     private int status;
 
     CouponStatus(int status) {
-        status = this.status;
+        this.status = status;
     }
 
     public int value() {
-        return status;
+        return this.status;
     }
 
 }

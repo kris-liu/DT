@@ -12,11 +12,11 @@ public enum AccountFlowStatus {
     private int status;
 
     AccountFlowStatus(int status) {
-        status = this.status;
+        this.status = status;
     }
 
     public int value() {
-        return status;
+        return this.status;
     }
 
 }

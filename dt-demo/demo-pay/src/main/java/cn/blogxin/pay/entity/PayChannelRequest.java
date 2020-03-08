@@ -12,6 +12,6 @@ public class PayChannelRequest {
 
     private long amount;
 
-    private String assetsId;
+    private String assetId;
 
 }

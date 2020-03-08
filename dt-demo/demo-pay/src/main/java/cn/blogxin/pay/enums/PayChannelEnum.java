@@ -5,17 +5,17 @@ package cn.blogxin.pay.enums;
  */
 public enum PayChannelEnum {
 
-    ACCOUNT(100),
-    COUPON(101);
+    ACCOUNT(10),
+    COUPON(11);
 
     private int status;
 
     PayChannelEnum(int status) {
-        status = this.status;
+        this.status = status;
     }
 
     public int value() {
-        return status;
+        return this.status;
     }
 
 }

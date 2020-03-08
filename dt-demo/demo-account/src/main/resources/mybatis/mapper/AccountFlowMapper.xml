@@ -28,7 +28,7 @@
           account_flow
           (uid,order_id,status,amount)
         VALUES
-          (#{accountFlow.uid}, #{accountFlow.orderId}, #{accountFlow.status}, #{accountFlow.amount})
+          (#{uid}, #{orderId}, #{status}, #{amount})
     </insert>
 
     <update id="updateStatus">

@@ -31,7 +31,7 @@ create table coupon (
    `coupon_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '券ID',
    `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
    `amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '券面额',
-   `orderId` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '交易流水ID',
+   `order_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '交易流水ID',
    PRIMARY KEY (`id`),
    UNIQUE KEY `uk_coupon_id` (`coupon_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='券表';
@@ -58,9 +58,22 @@ create table pay_channel (
    `channel_id` int(11) NOT NULL DEFAULT '0' COMMENT '渠道ID',
    `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
    `amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '交易金额',
-   `assets_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '资产ID',
+   `asset_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '资产ID',
    PRIMARY KEY (`id`),
    UNIQUE KEY `uk_order_id_channel_id` (`order_id`, `channel_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='支付订单渠道表';
+
+
+
+## 初始化数据
+
+DELETE FROM `account`.`account`;
+DELETE FROM `account`.`account_flow`;
+DELETE FROM `coupon`.`coupon`;
+DELETE FROM `pay`.`pay_order`;
+DELETE FROM `pay`.`pay_channel`;
+
+insert into `account`.`account` (uid, available_amount) VALUE ('000001', 1000000);
+insert into `coupon`.`coupon` (uid, coupon_id, status, amount) VALUE ('000001', 'COUPON000001', 0, 100);
 
 

@@ -11,8 +11,10 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,13 +25,14 @@ import java.util.List;
 @Controller
 public class PayController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(PayController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PayController.class);
 
     @Resource
     private PayService payService;
 
     @RequestMapping(path = "/pay", method = RequestMethod.POST)
-    public Object pay(PayRequest payRequest) {
+    @ResponseBody
+    public Object pay(@RequestBody PayRequest payRequest) {
         try {
             PayOrder order = build(payRequest);
             List<PayChannel> channels = buildChannels(payRequest);
@@ -55,7 +58,7 @@ public class PayController {
             PayChannel channel = new PayChannel();
             channel.setChannelId(request.getChannelId());
             channel.setAmount(request.getAmount());
-            channel.setAssetsId(StringUtils.defaultString(request.getAssetsId()));
+            channel.setAssetId(StringUtils.defaultString(request.getAssetId()));
             channel.setUid(payRequest.getUid());
             channel.setOrderId(payRequest.getOrderId());
             channel.setStatus(PayStatus.SUCCESS.value());

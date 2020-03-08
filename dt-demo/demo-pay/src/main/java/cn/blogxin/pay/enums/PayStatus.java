@@ -11,11 +11,11 @@ public enum PayStatus {
     private int status;
 
     PayStatus(int status) {
-        status = this.status;
+        this.status = status;
     }
 
     public int value() {
-        return status;
+        return this.status;
     }
 
 }
