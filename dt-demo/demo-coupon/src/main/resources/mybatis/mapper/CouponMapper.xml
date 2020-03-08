@@ -20,7 +20,7 @@
         FROM
           coupon
         WHERE
-          uid = #{uid} FOR UPDATE
+          uid = #{uid} and coupon_id = #{couponId} FOR UPDATE
     </select>
 
     <insert id="insert">

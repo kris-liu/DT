@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.blogxin.account.mapper.AccountFlowMapper">
+<mapper namespace="cn.blogxin.pay.mapper.PayOrderMapper">
 
-    <resultMap id="baseResultMap" type="cn.blogxin.account.entity.AccountFlow">
+    <resultMap id="baseResultMap" type="cn.blogxin.pay.entity.PayOrder">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="uid" property="uid" jdbcType="VARCHAR"/>
         <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
@@ -14,30 +14,21 @@
         id, uid, order_id, status, amount
     </sql>
 
-    <select id="queryForUpdate" parameterType="java.lang.String" resultMap="baseResultMap">
+    <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-        <include refid="baseColumnList"/>
+          <include refid="baseColumnList"/>
         FROM
-        account_flow
+          pay_order
         WHERE
-        uid = #{uid} and order_id = #{orderId} FOR UPDATE
+          uid = #{uid} and order_id = #{orderId}
     </select>
 
     <insert id="insert">
         INSERT INTO
-          account_flow
+          pay_order
           (uid,order_id,status,amount)
         VALUES
-          (#{accountFlow.uid}, #{accountFlow.orderId}, #{accountFlow.status}, #{accountFlow.amount})
+          (#{order.uid}, #{order.orderId}, #{order.status}, #{order.amount})
     </insert>
-
-    <update id="updateStatus">
-        UPDATE
-          account_flow
-        SET
-          status = #{status}
-        WHERE
-          uid = #{uid} and order_id = #{orderId} and status = #{currentStatus}
-    </update>
 
 </mapper>

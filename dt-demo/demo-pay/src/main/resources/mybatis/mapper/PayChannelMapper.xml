@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.blogxin.pay.mapper.PayChannelMapper">
+
+    <resultMap id="baseResultMap" type="cn.blogxin.pay.entity.PayChannel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
+        <result column="channel_id" property="channelId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="amount" property="amount" jdbcType="BIGINT"/>
+        <result column="assets_id" property="assetsId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id, uid, order_id, channel_id, status, amount, assetsId
+    </sql>
+
+    <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+          <include refid="baseColumnList"/>
+        FROM
+          pay_channel
+        WHERE
+          uid = #{uid} and order_id = #{orderId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO
+          pay_channel
+          (uid,order_id,channel_id,status,amount)
+        VALUES
+        <foreach collection="channels" item="item" index="index" separator=",">
+            (#{item.uid},
+            #{item.orderId},
+            #{item.channelId},
+            #{item.status},
+            #{item.amount},
+            #{item.assetsId})
+        </foreach>
+    </insert>
+
+</mapper>
