@@ -7,16 +7,10 @@ import cn.blogxin.common.account.dto.AccountDTO;
  */
 public interface AccountDubboService {
 
-    boolean transferIn(AccountDTO accountDTO);
+    boolean freeze(AccountDTO accountDTO);
 
-    boolean transferInCommit();
+    void commit(AccountDTO accountDTO);
 
-    boolean transferInRollBack();
-
-    boolean transferOut(AccountDTO accountDTO);
-
-    boolean transferOutCommit();
-
-    boolean transferOutRollBack();
+    void unfreeze(AccountDTO accountDTO);
 
 }

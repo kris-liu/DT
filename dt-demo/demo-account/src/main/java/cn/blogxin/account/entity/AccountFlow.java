@@ -6,14 +6,16 @@ import lombok.Data;
  * @author kris
  */
 @Data
-public class AccountPO {
+public class AccountFlow {
 
     private long id;
 
     private String uid;
 
-    private long availableAmount;
+    private String orderId;
 
-    private long freezeAmount;
+    private int status;
+
+    private long amount;
 
 }

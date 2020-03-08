@@ -1,7 +1,8 @@
 package cn.blogxin.account.mapper;
 
-import cn.blogxin.account.entity.AccountPO;
+import cn.blogxin.account.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,12 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountMapper {
 
-    AccountPO query(String uid);
+    Account query(@Param("uid") String uid);
 
-    boolean freeze(AccountPO accountPO);
+    int freeze(@Param("uid") String uid, @Param("amount") long amount);
 
-    boolean commit();
+    int commit(@Param("uid") String uid, @Param("amount") long amount);
 
-    boolean unfreeze();
+    int unfreeze(@Param("uid") String uid, @Param("amount") long amount);
 
 }

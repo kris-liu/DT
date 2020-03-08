@@ -7,16 +7,9 @@ import cn.blogxin.common.account.dto.AccountDTO;
  */
 public interface AccountService {
 
-    boolean transferIn(AccountDTO accountDTO);
+    boolean freeze(AccountDTO accountDTO);
 
-    boolean transferInCommit();
+    boolean commit(AccountDTO accountDTO);
 
-    boolean transferInRollBack();
-
-    boolean transferOut(AccountDTO accountDTO);
-
-    boolean transferOutCommit();
-
-    boolean transferOutRollBack();
-
+    boolean unfreeze(AccountDTO accountDTO);
 }
