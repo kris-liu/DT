@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * @author kris
  */
-@Mapper
 @Repository
 public interface PayChannelMapper {
 

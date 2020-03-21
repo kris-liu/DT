@@ -1,14 +1,12 @@
 package cn.blogxin.account.mapper;
 
 import cn.blogxin.account.entity.Account;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author kris
  */
-@Mapper
 @Repository
 public interface AccountMapper {
 

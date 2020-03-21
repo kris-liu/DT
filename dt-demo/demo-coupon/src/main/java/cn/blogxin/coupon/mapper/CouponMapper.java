@@ -1,14 +1,12 @@
 package cn.blogxin.coupon.mapper;
 
 import cn.blogxin.coupon.entity.Coupon;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author kris
  */
-@Mapper
 @Repository
 public interface CouponMapper {
 

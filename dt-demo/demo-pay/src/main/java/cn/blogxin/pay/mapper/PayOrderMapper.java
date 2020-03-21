@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * @author kris
  */
-@Mapper
 @Repository
 public interface PayOrderMapper {
 
