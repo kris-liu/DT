@@ -4,6 +4,10 @@ import cn.blogxin.dt.client.context.DTContext;
 import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
+import cn.blogxin.dt.client.log.repository.ActivityRepository;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.annotation.Resource;
@@ -12,10 +16,15 @@ import javax.annotation.Resource;
  * 事务管理器。控制分布式事务的边界，负责开启一个分布式事务，并最终发起分布式事务提交或回滚的决议。
  * @author kris
  */
-public class TransactionManager {
+public class TransactionManager implements ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
 
     @Resource
     private IdGenerator idGenerator;
+
+    @Resource
+    private ActivityRepository activityRepository;
 
     @Resource
     private LocalTransactionSynchronization localTransactionSynchronization;
@@ -44,5 +53,8 @@ public class TransactionManager {
     }
 
 
-
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }
