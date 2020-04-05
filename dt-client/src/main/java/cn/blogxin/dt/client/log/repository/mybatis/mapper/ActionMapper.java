@@ -1,4 +1,4 @@
-package cn.blogxin.dt.client.log.repository.mybatis;
+package cn.blogxin.dt.client.log.repository.mybatis.mapper;
 
 import cn.blogxin.dt.client.log.entity.Action;
 import org.apache.ibatis.annotations.Mapper;

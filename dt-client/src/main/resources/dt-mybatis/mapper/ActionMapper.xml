@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.blogxin.pay.mapper.PayChannelMapper">
 
-    <resultMap id="baseResultMap" type="cn.blogxin.dt.client.log.repository.mybatis.ActionMapper">
+    <resultMap id="baseResultMap" type="cn.blogxin.dt.client.log.repository.mybatis.mapper.ActionMapper">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="xid" property="xid" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
