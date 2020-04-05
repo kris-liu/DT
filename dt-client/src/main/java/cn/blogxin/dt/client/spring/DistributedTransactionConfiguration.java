@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  * @author kris
  */
 @Configuration
-@EnableConfigurationProperties(DTProperties.class)
-public class DTConfiguration {
+@EnableConfigurationProperties(DistributedTransactionProperties.class)
+public class DistributedTransactionConfiguration {
 
     @Resource
-    private DTProperties dtProperties;
+    private DistributedTransactionProperties distributedTransactionProperties;
 
     @Bean
     private TransactionManager transactionManager() {

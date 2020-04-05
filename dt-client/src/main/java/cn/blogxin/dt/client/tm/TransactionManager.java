@@ -1,5 +1,7 @@
 package cn.blogxin.dt.client.tm;
 
+import cn.blogxin.dt.client.context.DTContext;
+import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -24,8 +26,9 @@ public class TransactionManager {
 
         }
 
-        // 生成事务ID
         String xid = idGenerator.getId(suffix);
+        DTContext.set(DTContextEnum.XID, xid);
+
 
         // 插入主事务记录
 

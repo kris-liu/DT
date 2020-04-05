@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConfigurationProperties(prefix = "dt")
-public class DTProperties {
+public class DistributedTransactionProperties {
 
 
 
