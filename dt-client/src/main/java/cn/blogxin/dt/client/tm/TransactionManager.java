@@ -21,6 +21,7 @@ import java.util.Date;
 
 /**
  * 事务管理器。控制分布式事务的边界，负责开启一个分布式事务，并最终发起分布式事务提交或回滚的决议。
+ *
  * @author kris
  */
 public class TransactionManager implements ApplicationContextAware {
@@ -46,7 +47,8 @@ public class TransactionManager implements ApplicationContextAware {
         try {
             String xid = idGenerator.getId(suffix);
             DTContext.set(DTContextEnum.XID, xid);
-            Activity activity = initActivity(xid);
+            DTContext.set(DTContextEnum.START_TIME, new Date());
+            Activity activity = initActivity();
             activityRepository.insert(activity);
             activityRepository.updateStatus(activity.getXid(), activity.getStatus(), ActivityStatus.COMMIT.getStatus());
         } finally {
@@ -54,14 +56,15 @@ public class TransactionManager implements ApplicationContextAware {
         }
     }
 
-    private Activity initActivity(String xid) {
+    private Activity initActivity() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime timeOutTime = now.plusSeconds(distributedTransactionProperties.getTimeOutTime());
         LocalDateTime executionTime = timeOutTime.plusMinutes(NumberUtils.INTEGER_ONE);
         Activity activity = new Activity();
-        activity.setXid(xid);
+        activity.setXid((String) DTContext.get(DTContextEnum.XID));
         activity.setName(distributedTransactionProperties.getName());
         activity.setStatus(ActivityStatus.INIT.getStatus());
+        activity.setStartTime((Date) DTContext.get(DTContextEnum.START_TIME));
         activity.setTimeOutTime(Date.from(timeOutTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setExecutionTime(Date.from(executionTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setRetryCount(NumberUtils.INTEGER_ZERO);

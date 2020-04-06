@@ -5,7 +5,8 @@ package cn.blogxin.dt.client.context;
  */
 public enum DTContextEnum {
 
-    XID("xid");
+    XID("xid"),
+    START_TIME("startTime");
 
     private String key;
 

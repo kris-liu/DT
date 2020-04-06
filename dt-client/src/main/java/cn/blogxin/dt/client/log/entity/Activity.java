@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 主事务记录
+ *
  * @author kris
  */
 @Data
@@ -27,10 +29,15 @@ public class Activity implements Serializable {
 
     /**
      * 事务状态
+     *
      * @see ActivityStatus
      */
     private int status;
 
+    /**
+     * 事务开始时间
+     */
+    private Date startTime;
     /**
      * 事务超时时间
      */

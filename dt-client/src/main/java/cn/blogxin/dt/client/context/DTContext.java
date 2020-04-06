@@ -9,14 +9,18 @@ import java.util.Map;
  */
 public final class DTContext {
 
-    private static final ThreadLocal<Map<String, Object>> CONTEXT = ThreadLocal.withInitial(Maps::newHashMap);
+    private static final ThreadLocal<Map<DTContextEnum, Object>> CONTEXT = ThreadLocal.withInitial(Maps::newHashMap);
 
     public static void set(DTContextEnum contextEnum, Object value) {
-        CONTEXT.get().put(contextEnum.getKey(), value);
+        CONTEXT.get().put(contextEnum, value);
     }
 
     public static Object get(DTContextEnum contextEnum) {
-        return CONTEXT.get().get(contextEnum.getKey());
+        return CONTEXT.get().get(contextEnum);
+    }
+
+    public static boolean inTransaction() {
+        return CONTEXT.get().get(DTContextEnum.XID) != null;
     }
 
     public static void clear() {

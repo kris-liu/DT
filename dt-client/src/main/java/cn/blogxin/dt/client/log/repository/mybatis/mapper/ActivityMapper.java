@@ -30,6 +30,7 @@ public interface ActivityMapper {
 
     /**
      * 更新主事务记录状态
+     *
      * @param xid
      * @param fromStatus
      * @param toStatus

@@ -21,5 +21,4 @@ public class DistributedTransactionProperties {
 //    private String name;
 
 
-
 }
