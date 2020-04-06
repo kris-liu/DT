@@ -1,6 +1,5 @@
 package cn.blogxin.dt.client.rm;
 
-import cn.blogxin.dt.client.aop.ActionResource;
 import com.google.common.collect.Maps;
 
 import java.util.Map;

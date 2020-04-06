@@ -1,4 +1,4 @@
-package cn.blogxin.dt.client.aop;
+package cn.blogxin.dt.client.rm;
 
 import lombok.Data;
 

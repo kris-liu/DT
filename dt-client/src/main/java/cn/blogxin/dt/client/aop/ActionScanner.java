@@ -1,6 +1,7 @@
 package cn.blogxin.dt.client.aop;
 
 import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
+import cn.blogxin.dt.client.rm.ActionResource;
 import cn.blogxin.dt.client.rm.ResourceManager;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
