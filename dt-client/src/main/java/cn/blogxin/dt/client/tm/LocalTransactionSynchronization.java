@@ -1,5 +1,6 @@
 package cn.blogxin.dt.client.tm;
 
+import cn.blogxin.dt.client.context.DTContext;
 import org.springframework.transaction.support.TransactionSynchronization;
 
 /**
@@ -13,5 +14,6 @@ public class LocalTransactionSynchronization implements TransactionSynchronizati
         } else if (status == TransactionSynchronization.STATUS_ROLLED_BACK) {
 
         }
+        DTContext.clear();
     }
 }
