@@ -9,7 +9,6 @@ import cn.blogxin.dt.client.log.repository.ActionRepository;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -17,8 +16,11 @@ import java.util.Date;
  */
 public class ActionInterceptor implements MethodInterceptor {
 
-    @Resource
     private ActionRepository actionRepository;
+
+    public ActionInterceptor(ActionRepository actionRepository) {
+        this.actionRepository = actionRepository;
+    }
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {

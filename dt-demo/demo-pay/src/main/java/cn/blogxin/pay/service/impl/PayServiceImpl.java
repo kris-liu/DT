@@ -5,6 +5,7 @@ import cn.blogxin.common.account.service.AccountDubboService;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
+import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.pay.entity.PayChannel;
 import cn.blogxin.pay.entity.PayOrder;
@@ -45,6 +46,9 @@ public class PayServiceImpl implements PayService {
 
     @Resource
     private TransactionManager dtTransactionManager;
+
+    @Resource
+    private ActivityRepository activityRepository;
 
     @Resource
     private ActionRepository actionRepository;

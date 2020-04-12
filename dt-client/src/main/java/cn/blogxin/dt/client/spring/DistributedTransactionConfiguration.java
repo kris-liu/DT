@@ -1,7 +1,6 @@
 package cn.blogxin.dt.client.spring;
 
 import cn.blogxin.dt.client.aop.ActionAutoProxyCreator;
-import cn.blogxin.dt.client.aop.ActionInterceptor;
 import cn.blogxin.dt.client.aop.ActionRegisterScanner;
 import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
@@ -27,14 +26,25 @@ public class DistributedTransactionConfiguration {
     @Resource
     private DistributedTransactionProperties distributedTransactionProperties;
 
+
     @Bean
-    public ActionInterceptor actionInterceptor() {
-        return new ActionInterceptor();
+    public ActivityRepository activityRepository() {
+        return new ActivityRepository();
     }
 
     @Bean
+    public ActionRepository actionRepository() {
+        return new ActionRepository();
+    }
+
+//    @Bean
+//    public ActionInterceptor actionInterceptor(ActionRepository actionRepository) {
+//        return new ActionInterceptor(actionRepository);
+//    }
+
+    @Bean
     public ActionAutoProxyCreator actionAutoProxyCreator() {
-        return new ActionAutoProxyCreator(actionInterceptor());
+        return new ActionAutoProxyCreator(null);
     }
 
     @Bean
@@ -50,16 +60,6 @@ public class DistributedTransactionConfiguration {
     @Bean
     public LocalTransactionSynchronization localTransactionSynchronization() {
         return new LocalTransactionSynchronization();
-    }
-
-    @Bean
-    public ActivityRepository activityRepository() {
-        return new ActivityRepository();
-    }
-
-    @Bean
-    public ActionRepository actionRepository() {
-        return new ActionRepository();
     }
 
     @Bean
