@@ -20,7 +20,7 @@
           dt.action
           (xid, name, status, gmt_create, gmt_modified)
         VALUES
-          (#{xid}, #{name}, #{status})
+          (#{xid}, #{name}, #{status}, #{gmtCreate}, #{gmtModified})
     </insert>
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">

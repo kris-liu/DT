@@ -4,6 +4,7 @@ import cn.blogxin.common.account.dto.AccountDTO;
 import cn.blogxin.common.account.service.AccountDubboService;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
+import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.pay.entity.PayChannel;
 import cn.blogxin.pay.entity.PayOrder;
@@ -33,13 +34,8 @@ public class PayServiceImpl implements PayService {
         this.accountDubboService = accountDubboService;
     }
 
-
-    private CouponDubboService couponDubboService;
-
     @Reference
-    public void setCouponDubboService(CouponDubboService couponDubboService) {
-        this.couponDubboService = couponDubboService;
-    }
+    private CouponDubboService couponDubboService;
 
     @Resource
     private PayOrderMapper payOrderMapper;
@@ -49,6 +45,9 @@ public class PayServiceImpl implements PayService {
 
     @Resource
     private TransactionManager dtTransactionManager;
+
+    @Resource
+    private ActionRepository actionRepository;
 
 
     @Override

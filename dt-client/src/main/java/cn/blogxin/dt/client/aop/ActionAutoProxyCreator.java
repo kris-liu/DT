@@ -26,7 +26,6 @@ public class ActionAutoProxyCreator extends AbstractAutoProxyCreator {
 
     @Override
     protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
-        logger.info("wrapIfNecessary: " + bean.getClass().getName() + "_" + beanName + "_" + cacheKey);
         return super.wrapIfNecessary(bean, beanName, cacheKey);
     }
 

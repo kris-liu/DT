@@ -3,8 +3,11 @@ package cn.blogxin.dt.client.aop;
 import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
 import cn.blogxin.dt.client.rm.ActionResource;
 import cn.blogxin.dt.client.rm.ResourceManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import java.lang.reflect.Method;
 
@@ -14,10 +17,25 @@ import java.lang.reflect.Method;
  *
  * @author kris
  */
-public class ActionRegisterScanner implements BeanPostProcessor {
+@Slf4j
+public class ActionRegisterScanner implements BeanPostProcessor, ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+//        ConfigurableBeanFactory applicationContext = (ConfigurableBeanFactory) this.applicationContext.getAutowireCapableBeanFactory();
+//        String[] singletonNames = applicationContext.getSingletonNames();
+//        for (String name : singletonNames) {
+//            if (name.startsWith("@R")) {
+//                System.out.println(name);
+//                Object aThisapplicationContextBean = this.applicationContext.getBean(name);
+//                Object initialization = this.applicationContext.getAutowireCapableBeanFactory().applyBeanPostProcessorsAfterInitialization(aThisapplicationContextBean, name);
+//                System.out.println(initialization);
+//            }
+//        }
+
+
         Method[] methods = bean.getClass().getDeclaredMethods();
         for (Method method : methods) {
             TwoPhaseCommit annotation = method.getAnnotation(TwoPhaseCommit.class);
@@ -32,5 +50,10 @@ public class ActionRegisterScanner implements BeanPostProcessor {
             }
         }
         return bean;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }
