@@ -1,1 +1,1 @@
-dtActionFilter=cn.blogxin.dt.dubbo.ActionFilter
+dtActionFilter=cn.blogxin.dt.client.dubbo.ActionFilter

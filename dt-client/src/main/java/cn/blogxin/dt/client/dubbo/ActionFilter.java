@@ -1,4 +1,4 @@
-package cn.blogxin.dt.dubbo;
+package cn.blogxin.dt.client.dubbo;
 
 import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
 import cn.blogxin.dt.client.context.DTContext;
