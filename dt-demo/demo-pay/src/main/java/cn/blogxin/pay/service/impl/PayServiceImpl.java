@@ -25,11 +25,21 @@ import java.util.List;
 @Service
 public class PayServiceImpl implements PayService {
 
-    @Reference
+
     private AccountDubboService accountDubboService;
 
     @Reference
+    public void setAccountDubboService(AccountDubboService accountDubboService) {
+        this.accountDubboService = accountDubboService;
+    }
+
+
     private CouponDubboService couponDubboService;
+
+    @Reference
+    public void setCouponDubboService(CouponDubboService couponDubboService) {
+        this.couponDubboService = couponDubboService;
+    }
 
     @Resource
     private PayOrderMapper payOrderMapper;
@@ -38,7 +48,7 @@ public class PayServiceImpl implements PayService {
     private PayChannelMapper payChannelMapper;
 
     @Resource
-    private TransactionManager transactionManager;
+    private TransactionManager dtTransactionManager;
 
 
     @Override
@@ -47,7 +57,7 @@ public class PayServiceImpl implements PayService {
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
         try {
-            transactionManager.start();
+            dtTransactionManager.start();
             payOrderMapper.insert(payOrder);
             payChannelMapper.insert(channels);
 

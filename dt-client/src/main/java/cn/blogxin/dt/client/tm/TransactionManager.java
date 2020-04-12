@@ -45,7 +45,7 @@ public class TransactionManager implements ApplicationContextAware {
     }
 
     public void start(String suffix) {
-        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+        if (!TransactionSynchronizationManager.isActualTransactionActive()) {
             throw new DTException("分布式事务需要在一个本地事务环境中开启");
         }
         try {
@@ -62,14 +62,14 @@ public class TransactionManager implements ApplicationContextAware {
 
     private Activity initActivity() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime timeOutTime = now.plusSeconds(distributedTransactionProperties.getTimeOutTime());
-        LocalDateTime executionTime = timeOutTime.plusMinutes(NumberUtils.INTEGER_ONE);
+        LocalDateTime timeoutTime = now.plusSeconds(distributedTransactionProperties.getTimeoutTime());
+        LocalDateTime executionTime = timeoutTime.plusMinutes(NumberUtils.INTEGER_ONE);
         Activity activity = new Activity();
         activity.setXid((String) DTContext.get(DTContextEnum.XID));
         activity.setName(distributedTransactionProperties.getName());
         activity.setStatus(ActivityStatus.INIT.getStatus());
         activity.setStartTime((Date) DTContext.get(DTContextEnum.START_TIME));
-        activity.setTimeoutTime(Date.from(timeOutTime.atZone(ZoneId.systemDefault()).toInstant()));
+        activity.setTimeoutTime(Date.from(timeoutTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setExecutionTime(Date.from(executionTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setRetryCount(NumberUtils.INTEGER_ZERO);
         Date nowDate = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());

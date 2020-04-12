@@ -14,7 +14,7 @@ public class DistributedTransactionProperties {
 
     private String name;
 
-    private long timeOutTime;
+    private long timeoutTime;
 
 
 //    private String name;

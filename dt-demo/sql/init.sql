@@ -66,12 +66,13 @@ create table pay_channel (
 
 
 ## 初始化数据
-
 DELETE FROM `account`.`account`;
 DELETE FROM `account`.`account_flow`;
 DELETE FROM `coupon`.`coupon`;
 DELETE FROM `pay`.`pay_order`;
 DELETE FROM `pay`.`pay_channel`;
+DELETE FROM `dt`.`activity`;
+DELETE FROM `dt`.`action`;
 
 insert into `account`.`account` (uid, available_amount) VALUE ('000001', 1000000);
 insert into `coupon`.`coupon` (uid, coupon_id, status, amount) VALUE ('000001', 'COUPON000001', 0, 100);

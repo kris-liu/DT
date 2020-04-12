@@ -27,3 +27,8 @@ create table action (
    PRIMARY KEY (`id`),
    UNIQUE KEY `uk_xid_name` (`xid`, `name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='分支事务记录表';
+
+
+DELETE FROM `dt`.`activity`;
+DELETE FROM `dt`.`action`;
+

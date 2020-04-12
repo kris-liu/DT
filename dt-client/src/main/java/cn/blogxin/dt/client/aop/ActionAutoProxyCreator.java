@@ -1,9 +1,11 @@
 package cn.blogxin.dt.client.aop;
 
 import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator;
 import org.springframework.beans.BeansException;
+import org.springframework.core.Ordered;
 import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Method;
@@ -13,11 +15,18 @@ import java.lang.reflect.Method;
  */
 public class ActionAutoProxyCreator extends AbstractAutoProxyCreator {
 
-    private Object[] interceptors = new Object[]{new ActionInterceptor()};
+    private Object[] interceptors;
 
+
+    public ActionAutoProxyCreator(MethodInterceptor interceptor) {
+        setOrder(Ordered.LOWEST_PRECEDENCE);
+        setProxyTargetClass(true);
+        this.interceptors = new Object[]{interceptor};
+    }
 
     @Override
     protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
+        logger.info("wrapIfNecessary: " + bean.getClass().getName() + "_" + beanName + "_" + cacheKey);
         return super.wrapIfNecessary(bean, beanName, cacheKey);
     }
 
@@ -30,6 +39,7 @@ public class ActionAutoProxyCreator extends AbstractAutoProxyCreator {
                 return interceptors;
             }
         }
-        return new Object[0];
+        return null;
     }
+
 }

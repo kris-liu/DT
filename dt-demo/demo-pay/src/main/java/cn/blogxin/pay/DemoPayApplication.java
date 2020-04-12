@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author xin
  */
 @SpringBootApplication
-@MapperScan("cn.blogxin.pay.mapper")
+@MapperScan({"cn.blogxin.pay.mapper", "cn.blogxin.dt.client.log.repository.mybatis.mapper"})
 public class DemoPayApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoPayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoPayApplication.class, args);
+    }
 
 }
