@@ -14,15 +14,20 @@ import java.lang.reflect.Method;
  *
  * @author kris
  */
-public class ActionScanner implements BeanPostProcessor {
+public class ActionRegisterScanner implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        Method[] methods = bean.getClass().getMethods();
+        Method[] methods = bean.getClass().getDeclaredMethods();
         for (Method method : methods) {
             TwoPhaseCommit annotation = method.getAnnotation(TwoPhaseCommit.class);
             if (annotation != null) {
                 ActionResource resource = new ActionResource();
+                resource.setActionBean(annotation.name());
+                resource.setActionBean(bean);
+                resource.setTryMethod(method.getName());
+                resource.setConfirmMethod(annotation.confirmMethod());
+                resource.setCancelMethod(annotation.cancelMethod());
                 ResourceManager.registerResource(resource);
             }
         }

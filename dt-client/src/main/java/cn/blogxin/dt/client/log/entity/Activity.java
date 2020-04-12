@@ -1,5 +1,6 @@
 package cn.blogxin.dt.client.log.entity;
 
+import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -41,7 +42,7 @@ public class Activity implements Serializable {
     /**
      * 事务超时时间
      */
-    private Date timeOutTime;
+    private Date timeoutTime;
 
     /**
      * 执行时间，每次重试后将执行时间向后延迟
@@ -49,7 +50,7 @@ public class Activity implements Serializable {
     private Date executionTime;
 
     /**
-     * 重试次数
+     * 二阶段重试次数
      */
     private int retryCount;
 

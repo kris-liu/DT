@@ -6,29 +6,40 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="xid" property="xid" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
     <sql id="baseColumnList">
-        id, xid, name, status
+        id, xid, name, status, gmt_create, gmt_modified
     </sql>
 
     <insert id="insert">
         INSERT INTO
           action
-          (xid, name, status)
+          (xid, name, status, gmt_create, gmt_modified)
         VALUES
           (#{xid}, #{name}, #{status})
     </insert>
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-          <include refid="baseColumnList"/>
+        <include refid="baseColumnList"/>
         FROM
-          action
+        action
         WHERE
-          xid = #{xid}
+        xid = #{xid}
     </select>
+
+    <update id="updateStatus">
+        UPDATE
+        activity
+        SET
+        status=#{toStatus}, gmt_modified=NOW()
+        WHERE
+        xid = #{xid} and name=#{name} and status=#{fromStatus}
+    </update>
 
 
 </mapper>

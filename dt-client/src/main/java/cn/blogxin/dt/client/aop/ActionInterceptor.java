@@ -4,7 +4,7 @@ import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
 import cn.blogxin.dt.client.context.DTContext;
 import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.log.entity.Action;
-import cn.blogxin.dt.client.log.entity.ActionStatus;
+import cn.blogxin.dt.client.log.enums.ActionStatus;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;

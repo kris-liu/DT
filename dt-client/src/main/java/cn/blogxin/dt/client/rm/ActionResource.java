@@ -2,8 +2,6 @@ package cn.blogxin.dt.client.rm;
 
 import lombok.Data;
 
-import java.lang.reflect.Method;
-
 /**
  * @author kris
  */
@@ -14,11 +12,11 @@ public class ActionResource {
 
     private Object actionBean;
 
-    private Method tryMethod;
+    private String tryMethod;
 
-    private Method confirmMethod;
+    private String confirmMethod;
 
-    private Method cancelMethod;
+    private String cancelMethod;
 
 
 }

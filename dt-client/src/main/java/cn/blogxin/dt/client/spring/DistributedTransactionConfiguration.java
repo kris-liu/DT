@@ -1,5 +1,7 @@
 package cn.blogxin.dt.client.spring;
 
+import cn.blogxin.dt.client.aop.ActionAutoProxyCreator;
+import cn.blogxin.dt.client.aop.ActionRegisterScanner;
 import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.tm.TransactionManager;
@@ -20,7 +22,17 @@ public class DistributedTransactionConfiguration {
     private DistributedTransactionProperties distributedTransactionProperties;
 
     @Bean
-    private TransactionManager transactionManager() {
+    private ActionAutoProxyCreator actionAutoProxyCreator() {
+        return new ActionAutoProxyCreator();
+    }
+
+    @Bean
+    private ActionRegisterScanner actionRegisterScanner() {
+        return new ActionRegisterScanner();
+    }
+
+    @Bean
+    private TransactionManager dtTransactionManager() {
         return new TransactionManager();
     }
 

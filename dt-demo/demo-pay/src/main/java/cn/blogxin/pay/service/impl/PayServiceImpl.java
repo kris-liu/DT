@@ -4,6 +4,7 @@ import cn.blogxin.common.account.dto.AccountDTO;
 import cn.blogxin.common.account.service.AccountDubboService;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
+import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.pay.entity.PayChannel;
 import cn.blogxin.pay.entity.PayOrder;
 import cn.blogxin.pay.enums.PayChannelEnum;
@@ -36,6 +37,9 @@ public class PayServiceImpl implements PayService {
     @Resource
     private PayChannelMapper payChannelMapper;
 
+    @Resource
+    private TransactionManager transactionManager;
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -43,6 +47,7 @@ public class PayServiceImpl implements PayService {
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
         try {
+            transactionManager.start();
             payOrderMapper.insert(payOrder);
             payChannelMapper.insert(channels);
 

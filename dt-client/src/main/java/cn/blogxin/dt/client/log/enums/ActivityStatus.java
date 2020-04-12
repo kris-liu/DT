@@ -1,4 +1,4 @@
-package cn.blogxin.dt.client.log.entity;
+package cn.blogxin.dt.client.log.enums;
 
 /**
  * @author kris

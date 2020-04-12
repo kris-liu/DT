@@ -5,7 +5,7 @@ import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.entity.Activity;
-import cn.blogxin.dt.client.log.entity.ActivityStatus;
+import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.spring.DistributedTransactionProperties;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -40,6 +40,10 @@ public class TransactionManager implements ApplicationContextAware {
     @Resource
     private LocalTransactionSynchronization localTransactionSynchronization;
 
+    public void start() {
+        start(null);
+    }
+
     public void start(String suffix) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             throw new DTException("分布式事务需要在一个本地事务环境中开启");
@@ -65,7 +69,7 @@ public class TransactionManager implements ApplicationContextAware {
         activity.setName(distributedTransactionProperties.getName());
         activity.setStatus(ActivityStatus.INIT.getStatus());
         activity.setStartTime((Date) DTContext.get(DTContextEnum.START_TIME));
-        activity.setTimeOutTime(Date.from(timeOutTime.atZone(ZoneId.systemDefault()).toInstant()));
+        activity.setTimeoutTime(Date.from(timeOutTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setExecutionTime(Date.from(executionTime.atZone(ZoneId.systemDefault()).toInstant()));
         activity.setRetryCount(NumberUtils.INTEGER_ZERO);
         Date nowDate = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());

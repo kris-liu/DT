@@ -1,5 +1,6 @@
 package cn.blogxin.dt.client.log.entity;
 
+import cn.blogxin.dt.client.log.enums.ActionStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,29 +19,29 @@ public class Action implements Serializable {
     private long id;
 
     /**
-     * 事务ID
+     * 主事务ID
      */
     private String xid;
 
     /**
-     * 事务名称
+     * 分支事务名称
      */
     private String name;
 
     /**
-     * 事务状态
+     * 分支事务状态
      *
      * @see ActionStatus
      */
     private int status;
 
     /**
-     * 事务创建时间
+     * 分支事务创建时间
      */
     private Date gmtCreate;
 
     /**
-     * 事务更新时间
+     * 分支事务更新时间
      */
     private Date gmtModified;
 
