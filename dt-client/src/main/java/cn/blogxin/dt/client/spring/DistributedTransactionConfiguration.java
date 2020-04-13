@@ -1,12 +1,11 @@
 package cn.blogxin.dt.client.spring;
 
-import cn.blogxin.dt.client.aop.ActionAutoProxyCreator;
-import cn.blogxin.dt.client.aop.ActionRegisterScanner;
 import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
-import cn.blogxin.dt.client.tm.LocalTransactionSynchronization;
+import cn.blogxin.dt.client.rm.ResourceManager;
+import cn.blogxin.dt.client.tm.TwoPhaseTransactionSynchronization;
 import cn.blogxin.dt.client.tm.TransactionManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,19 +37,19 @@ public class DistributedTransactionConfiguration {
     }
 
 //    @Bean
-//    public ActionInterceptor actionInterceptor(ActionRepository actionRepository) {
-//        return new ActionInterceptor(actionRepository);
+//    public ActionInterceptor actionInterceptor() {
+//        return new ActionInterceptor();
 //    }
 
-    @Bean
-    public ActionAutoProxyCreator actionAutoProxyCreator() {
-        return new ActionAutoProxyCreator(null);
-    }
+//    @Bean
+//    public ActionAutoProxyCreator actionAutoProxyCreator() {
+//        return new ActionAutoProxyCreator();
+//    }
 
-    @Bean
-    public ActionRegisterScanner actionRegisterScanner() {
-        return new ActionRegisterScanner();
-    }
+//    @Bean
+//    public ActionRegisterScanner actionRegisterScanner() {
+//        return new ActionRegisterScanner();
+//    }
 
     @Bean
     public TransactionManager dtTransactionManager() {
@@ -58,8 +57,13 @@ public class DistributedTransactionConfiguration {
     }
 
     @Bean
-    public LocalTransactionSynchronization localTransactionSynchronization() {
-        return new LocalTransactionSynchronization();
+    public ResourceManager dtResourceManager() {
+        return new ResourceManager();
+    }
+
+    @Bean
+    public TwoPhaseTransactionSynchronization twoPhaseTransactionSynchronization() {
+        return new TwoPhaseTransactionSynchronization();
     }
 
     @Bean

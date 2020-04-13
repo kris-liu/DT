@@ -4,7 +4,6 @@ import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.log.entity.Action;
 import cn.blogxin.dt.client.log.repository.mybatis.mapper.ActionMapper;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * @author kris
  */
-@Repository
 public class ActionRepository {
 
     @Resource

@@ -15,8 +15,9 @@ public final class DTContext {
         CONTEXT.get().put(contextEnum, value);
     }
 
-    public static Object get(DTContextEnum contextEnum) {
-        return CONTEXT.get().get(contextEnum);
+    @SuppressWarnings("unchecked")
+    public static <T> T get(DTContextEnum contextEnum) {
+        return (T) contextEnum.getKeyClass().cast(CONTEXT.get().get(contextEnum));
     }
 
     public static boolean inTransaction() {

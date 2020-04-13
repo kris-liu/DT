@@ -16,9 +16,9 @@ public enum ActivityStatus {
     COMMIT(1),
 
     /**
-     * 主事务提交已全部执行完成
+     * 主事务提交，分支事务全部执行完成
      */
-    COMMIT_COMPLETE(2),
+    COMMIT_FINISH(2),
 
     /**
      * 主事务回滚

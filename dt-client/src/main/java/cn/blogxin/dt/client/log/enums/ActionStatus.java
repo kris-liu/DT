@@ -11,12 +11,12 @@ public enum ActionStatus {
     INIT(0),
 
     /**
-     * 分支事务提交
+     * 分支事务提交完成
      */
     COMMIT(1),
 
     /**
-     * 分支事务回滚
+     * 分支事务回滚完成
      */
     ROLLBACK(3);
 

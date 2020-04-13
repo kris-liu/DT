@@ -47,12 +47,6 @@ public class PayServiceImpl implements PayService {
     @Resource
     private TransactionManager dtTransactionManager;
 
-    @Resource
-    private ActivityRepository activityRepository;
-
-    @Resource
-    private ActionRepository actionRepository;
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)
