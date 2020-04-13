@@ -60,7 +60,7 @@ public class TransactionManager implements ApplicationContextAware {
             DTContext.set(DTContextEnum.START_TIME, activity.getStartTime());
             DTContext.set(DTContextEnum.TIMEOUT_TIME, activity.getTimeoutTime());
             DTContext.set(DTContextEnum.ACTIVITY, activity);
-            DTContext.set(DTContextEnum.ACTION_MAP, new ActionContext());
+            DTContext.set(DTContextEnum.ACTION_CONTEXT, new ActionContext());
             activityRepository.insert(activity);
             activityRepository.updateStatus(activity.getXid(), activity.getStatus(), ActivityStatus.COMMIT.getStatus());
         } finally {
@@ -87,13 +87,11 @@ public class TransactionManager implements ApplicationContextAware {
     }
 
     public boolean commit() {
-        dtResourceManager.commitAction(null);
-        return true;
+        return dtResourceManager.commitAction();
     }
 
     public boolean rollback() {
-        dtResourceManager.rollbackAction(null);
-        return true;
+        return dtResourceManager.rollbackAction();
     }
 
 

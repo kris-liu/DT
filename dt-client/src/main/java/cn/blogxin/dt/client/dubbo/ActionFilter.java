@@ -44,7 +44,7 @@ public class ActionFilter implements Filter {
                 Date now = new Date();
                 action.setGmtCreate(now);
                 action.setGmtModified(now);
-                ActionContext actionMap = DTContext.get(DTContextEnum.ACTION_MAP);
+                ActionContext actionMap = DTContext.get(DTContextEnum.ACTION_CONTEXT);
                 actionMap.put(action.getName(), action);
                 ExtensionFactory objectFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
                 ResourceManager resourceManager = objectFactory.getExtension(ResourceManager.class, "dtResourceManager");
