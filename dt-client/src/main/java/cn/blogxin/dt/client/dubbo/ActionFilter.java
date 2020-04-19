@@ -1,13 +1,14 @@
 package cn.blogxin.dt.client.dubbo;
 
 import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
-import cn.blogxin.dt.client.context.ActionContext;
 import cn.blogxin.dt.client.context.DTContext;
 import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.log.entity.Action;
 import cn.blogxin.dt.client.log.enums.ActionStatus;
 import cn.blogxin.dt.client.rm.ResourceManager;
+import cn.blogxin.dt.client.util.Utils;
+import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
@@ -36,16 +37,14 @@ public class ActionFilter implements Filter {
             Method method = aClass.getDeclaredMethod(invocation.getMethodName(), invocation.getParameterTypes());
             TwoPhaseCommit annotation = method.getAnnotation(TwoPhaseCommit.class);
             if (annotation != null) {
-                String actionName = annotation.name();
+                Date now = new Date();
                 Action action = new Action();
                 action.setXid(DTContext.get(DTContextEnum.XID));
-                action.setName(actionName);
+                action.setName(Utils.getActionName(aClass, method, annotation));
                 action.setStatus(ActionStatus.INIT.getStatus());
-                Date now = new Date();
+                action.setArguments(JSONArray.toJSONString(invocation.getArguments()));
                 action.setGmtCreate(now);
                 action.setGmtModified(now);
-                ActionContext actionMap = DTContext.get(DTContextEnum.ACTION_CONTEXT);
-                actionMap.put(action.getName(), action);
                 ExtensionFactory objectFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
                 ResourceManager resourceManager = objectFactory.getExtension(ResourceManager.class, "dtResourceManager");
                 resourceManager.registerAction(action);

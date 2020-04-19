@@ -27,13 +27,8 @@ import java.util.List;
 @Service
 public class PayServiceImpl implements PayService {
 
-
-    private AccountDubboService accountDubboService;
-
     @Reference
-    public void setAccountDubboService(AccountDubboService accountDubboService) {
-        this.accountDubboService = accountDubboService;
-    }
+    private AccountDubboService accountDubboService;
 
     @Reference
     private CouponDubboService couponDubboService;
@@ -53,24 +48,12 @@ public class PayServiceImpl implements PayService {
     public boolean accountAndCouponPay(PayOrder payOrder, List<PayChannel> channels) {
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
-        try {
-            dtTransactionManager.start();
-            payOrderMapper.insert(payOrder);
-            payChannelMapper.insert(channels);
-
-            Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
-
-            Preconditions.checkArgument(couponDubboService.freeze(couponDTO), "券冻结失败");
-
-//            int i = 10/0;
-
-            accountDubboService.commit(accountDTO);
-            couponDubboService.commit(couponDTO);
-        } catch (Exception e) {
-            accountDubboService.unfreeze(accountDTO);
-            couponDubboService.unfreeze(couponDTO);
-        }
-
+        dtTransactionManager.start();
+        payOrderMapper.insert(payOrder);
+        payChannelMapper.insert(channels);
+        Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
+        int i = 10/0;
+        Preconditions.checkArgument(couponDubboService.freeze(couponDTO), "券冻结失败");
         return true;
     }
 

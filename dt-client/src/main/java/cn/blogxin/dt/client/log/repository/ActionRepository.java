@@ -34,7 +34,7 @@ public class ActionRepository {
     public void updateStatus(String xid, String name, int fromStatus, int toStatus) {
         int update = actionMapper.updateStatus(xid, name, fromStatus, toStatus);
         if (update != NumberUtils.INTEGER_ONE) {
-            throw new DTException("更新分支事务记录Action异常，待重试");
+            throw new DTException("更新分支事务记录Action异常");
         }
     }
 

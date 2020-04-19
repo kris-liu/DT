@@ -33,7 +33,7 @@ public class ActivityRepository {
     public void updateStatus(String xid, int fromStatus, int toStatus) {
         int update = activityMapper.updateStatus(xid, fromStatus, toStatus);
         if (update != NumberUtils.INTEGER_ONE) {
-            throw new DTException("更新主事务记录Activity异常，事务回滚");
+            throw new DTException("更新主事务记录Activity异常");
         }
     }
 

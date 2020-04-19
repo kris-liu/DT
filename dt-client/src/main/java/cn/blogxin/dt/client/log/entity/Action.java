@@ -36,6 +36,11 @@ public class Action implements Serializable {
     private int status;
 
     /**
+     * 分支事务一阶段参数
+     */
+    private String arguments;
+
+    /**
      * 分支事务创建时间
      */
     private Date gmtCreate;

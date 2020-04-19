@@ -3,6 +3,7 @@ package cn.blogxin.account.dubbo;
 import cn.blogxin.account.service.AccountService;
 import cn.blogxin.common.account.dto.AccountDTO;
 import cn.blogxin.common.account.service.AccountDubboService;
+import cn.blogxin.dt.client.context.DTParam;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,13 @@ public class AccountDubboServiceImpl implements AccountDubboService {
     }
 
     @Override
-    public void commit(AccountDTO accountDTO) {
+    public void commit(DTParam dtParam, AccountDTO accountDTO) {
         accountService.commit(accountDTO);
 
     }
 
     @Override
-    public void unfreeze(AccountDTO accountDTO) {
+    public void unfreeze(DTParam dtParam, AccountDTO accountDTO) {
         accountService.unfreeze(accountDTO);
     }
 }

@@ -7,20 +7,21 @@
         <result column="xid" property="xid" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="arguments" property="arguments" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
     <sql id="baseColumnList">
-        id, xid, name, status, gmt_create, gmt_modified
+        id, xid, name, status, arguments, gmt_create, gmt_modified
     </sql>
 
     <insert id="insert">
         INSERT INTO
           dt.action
-          (xid, name, status, gmt_create, gmt_modified)
+          (xid, name, status, arguments, gmt_create, gmt_modified)
         VALUES
-          (#{xid}, #{name}, #{status}, #{gmtCreate}, #{gmtModified})
+          (#{xid}, #{name}, #{status}, #{arguments}, #{gmtCreate}, #{gmtModified})
     </insert>
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">

@@ -9,4 +9,9 @@ public class DTException extends RuntimeException {
     public DTException(String message) {
         super(message);
     }
+
+    public DTException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

@@ -22,6 +22,7 @@ create table action (
    `xid` VARCHAR(128) NOT NULL DEFAULT '' COMMENT '主事务ID',
    `name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '分支事务名称',
    `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '分支事务状态',
+   `arguments` VARCHAR(2000) NOT NULL DEFAULT '' COMMENT '分支事务一阶段参数',
    `gmt_create` DATETIME NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '分支事务创建时间',
    `gmt_modified` DATETIME NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '分支事务更新时间',
    PRIMARY KEY (`id`),

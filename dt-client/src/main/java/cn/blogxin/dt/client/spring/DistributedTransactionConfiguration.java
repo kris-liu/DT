@@ -1,12 +1,15 @@
 package cn.blogxin.dt.client.spring;
 
+import cn.blogxin.dt.client.dubbo.DubboActionRegisterApplicationListener;
 import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
-import cn.blogxin.dt.client.tm.TwoPhaseTransactionSynchronization;
 import cn.blogxin.dt.client.tm.TransactionManager;
+import cn.blogxin.dt.client.tm.TwoPhaseTransactionSynchronization;
+import org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +39,11 @@ public class DistributedTransactionConfiguration {
         return new ActionRepository();
     }
 
+    @Bean
+    @ConditionalOnClass(ReferenceAnnotationBeanPostProcessor.class)
+    public DubboActionRegisterApplicationListener dubboActionRegisterApplicationListener() {
+        return new DubboActionRegisterApplicationListener();
+    }
 //    @Bean
 //    public ActionInterceptor actionInterceptor() {
 //        return new ActionInterceptor();

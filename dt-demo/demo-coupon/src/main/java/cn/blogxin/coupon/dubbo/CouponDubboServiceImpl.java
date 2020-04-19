@@ -3,6 +3,7 @@ package cn.blogxin.coupon.dubbo;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
 import cn.blogxin.coupon.service.CouponService;
+import cn.blogxin.dt.client.context.DTParam;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +32,13 @@ public class CouponDubboServiceImpl implements CouponDubboService {
     }
 
     @Override
-    public void commit(CouponDTO couponDTO) {
+    public void commit(DTParam dtParam, CouponDTO couponDTO) {
         couponService.commit(couponDTO);
     }
 
     @Override
-    public void unfreeze(CouponDTO couponDTO) {
+    public void unfreeze(DTParam dtParam, CouponDTO couponDTO) {
         couponService.unfreeze(couponDTO);
     }
+
 }
