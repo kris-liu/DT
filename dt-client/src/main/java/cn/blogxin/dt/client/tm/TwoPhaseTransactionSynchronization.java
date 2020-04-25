@@ -10,6 +10,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
+ * 本地事务同步器。
+ * 用于在本地事务提交或回滚后执行分布式事务整体的提交或回滚
+ *
  * @author kris
  */
 public class TwoPhaseTransactionSynchronization implements TransactionSynchronization {
@@ -27,7 +30,6 @@ public class TwoPhaseTransactionSynchronization implements TransactionSynchroniz
             throw new DTException("分布式事务提交超时");
         }
     }
-
 
     @Override
     public void afterCompletion(int status) {

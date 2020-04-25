@@ -20,6 +20,10 @@ public final class DTContext {
         return (T) contextEnum.getKeyClass().cast(CONTEXT.get().get(contextEnum));
     }
 
+    /**
+     * 是否在分布式事务环境中
+     * @return
+     */
     public static boolean inTransaction() {
         return CONTEXT.get().get(DTContextEnum.XID) != null;
     }

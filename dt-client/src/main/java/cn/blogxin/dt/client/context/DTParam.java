@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 用于传递事务上下文
+ *
  * @author kris
  */
 @Data

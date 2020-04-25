@@ -3,6 +3,9 @@ package cn.blogxin.dt.client.annotation;
 import java.lang.annotation.*;
 
 /**
+ * 二阶段提交注解。
+ * 分支事务提供二阶段方法时，需要在try方法上添加该注解
+ *
  * @author kris
  */
 @Documented

@@ -4,8 +4,6 @@ import cn.blogxin.common.account.dto.AccountDTO;
 import cn.blogxin.common.account.service.AccountDubboService;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
-import cn.blogxin.dt.client.log.repository.ActionRepository;
-import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.pay.entity.PayChannel;
 import cn.blogxin.pay.entity.PayOrder;
@@ -48,7 +46,7 @@ public class PayServiceImpl implements PayService {
     public boolean accountAndCouponPay(PayOrder payOrder, List<PayChannel> channels) {
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
-        dtTransactionManager.start();
+        dtTransactionManager.start(null);
         payOrderMapper.insert(payOrder);
         payChannelMapper.insert(channels);
         Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");

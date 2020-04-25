@@ -5,8 +5,12 @@ import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
+import cn.blogxin.dt.client.log.repository.mybatis.ActionMybatisRepository;
+import cn.blogxin.dt.client.log.repository.mybatis.ActivityMybatisRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
+import cn.blogxin.dt.client.rm.ResourceManagerImpl;
 import cn.blogxin.dt.client.tm.TransactionManager;
+import cn.blogxin.dt.client.tm.TransactionManagerImpl;
 import cn.blogxin.dt.client.tm.TwoPhaseTransactionSynchronization;
 import org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -31,12 +35,12 @@ public class DistributedTransactionConfiguration {
 
     @Bean
     public ActivityRepository activityRepository() {
-        return new ActivityRepository();
+        return new ActivityMybatisRepository();
     }
 
     @Bean
     public ActionRepository actionRepository() {
-        return new ActionRepository();
+        return new ActionMybatisRepository();
     }
 
     @Bean
@@ -44,29 +48,15 @@ public class DistributedTransactionConfiguration {
     public DubboActionRegisterApplicationListener dubboActionRegisterApplicationListener() {
         return new DubboActionRegisterApplicationListener();
     }
-//    @Bean
-//    public ActionInterceptor actionInterceptor() {
-//        return new ActionInterceptor();
-//    }
-
-//    @Bean
-//    public ActionAutoProxyCreator actionAutoProxyCreator() {
-//        return new ActionAutoProxyCreator();
-//    }
-
-//    @Bean
-//    public ActionRegisterScanner actionRegisterScanner() {
-//        return new ActionRegisterScanner();
-//    }
 
     @Bean
     public TransactionManager dtTransactionManager() {
-        return new TransactionManager();
+        return new TransactionManagerImpl();
     }
 
     @Bean
     public ResourceManager dtResourceManager() {
-        return new ResourceManager();
+        return new ResourceManagerImpl();
     }
 
     @Bean
