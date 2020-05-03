@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author kris
@@ -34,12 +36,27 @@ public class ActivityMybatisRepository implements ActivityRepository {
     }
 
     @Override
+    public Activity queryForUpdate(String xid) {
+        return activityMapper.queryForUpdate(xid);
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void updateStatus(String xid, ActivityStatus fromStatus, ActivityStatus toStatus) {
         int update = activityMapper.updateStatus(xid, fromStatus.getStatus(), toStatus.getStatus());
         if (update != NumberUtils.INTEGER_ONE) {
             throw new DTException("更新主事务记录Activity异常");
         }
+    }
+
+    @Override
+    public List<Activity> queryUnfinished(String shardingKey, Date executionTime, int limit) {
+        return activityMapper.queryUnfinished(shardingKey, executionTime, limit);
+    }
+
+    @Override
+    public void updateRetry(String xid, int fromStatus, int retryCount, Date executeTime) {
+        activityMapper.updateRetry(xid, fromStatus, retryCount, executeTime);
     }
 
 }

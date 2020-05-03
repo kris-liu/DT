@@ -36,14 +36,44 @@
         xid = #{xid}
     </select>
 
+    <select id="queryForUpdate" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        dt.activity
+        WHERE
+        xid = #{xid}
+        FOR UPDATE
+    </select>
 
     <update id="updateStatus">
         UPDATE
         dt.activity
         SET
-        status=#{toStatus}, gmt_modified=NOW()
+        status = #{toStatus}, gmt_modified = NOW()
         WHERE
-        xid = #{xid} and status=#{fromStatus}
+        xid = #{xid} and status = #{fromStatus}
+    </update>
+
+    <select id="queryUnfinished" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        dt.activity
+        WHERE
+        <![CDATA[
+          execution_time < #{executionTime} and status in (0, 1)
+        ]]>
+        LIMIT #{limit}
+    </select>
+
+    <update id="updateRetry">
+        update
+        dt.activity
+        set
+        retry_count = #{retryCount}, execution_time = #{executeTime}, gmt_modified = NOW()
+        WHERE
+        xid = #{xid} and status = #{fromStatus}
     </update>
 
 </mapper>

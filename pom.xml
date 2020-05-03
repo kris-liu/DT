@@ -40,6 +40,7 @@
         <mybatis-plus.version>2.3</mybatis-plus.version>
         <dubbo.version>2.7.5</dubbo.version>
         <dubbo-spring-boot-starter.version>2.7.5</dubbo-spring-boot-starter.version>
+        <elastic-job-lite.version>2.1.5</elastic-job-lite.version>
     </properties>
 
     <dependencyManagement>
@@ -168,6 +169,16 @@
                 <artifactId>dubbo-dependencies-zookeeper</artifactId>
                 <version>${dubbo.version}</version>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-core</artifactId>
+                <version>${elastic-job-lite.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-spring</artifactId>
+                <version>${elastic-job-lite.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

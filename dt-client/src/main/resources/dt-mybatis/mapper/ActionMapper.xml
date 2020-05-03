@@ -37,9 +37,9 @@
         UPDATE
         dt.action
         SET
-        status=#{toStatus}, gmt_modified=NOW()
+        status = #{toStatus}, gmt_modified = NOW()
         WHERE
-        xid = #{xid} and name=#{name} and status=#{fromStatus}
+        xid = #{xid} and name = #{name} and status = #{fromStatus}
     </update>
 
 

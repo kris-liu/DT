@@ -12,13 +12,24 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "dt")
 public class DistributedTransactionProperties {
 
+    /**
+     * 分布式事务是否启动
+     */
+    private boolean enable = false;
+
+    /**
+     * 分布式事务名称
+     */
     private String name;
 
-    private long timeoutTime;
+    /**
+     * 分布式任务超时时间，默认30S
+     */
+    private long timeoutTime = 30;
 
-
-//    private String name;
-//    private String name;
-
+    /**
+     * ElasticJob属性配置
+     */
+    private JobProperties job;
 
 }

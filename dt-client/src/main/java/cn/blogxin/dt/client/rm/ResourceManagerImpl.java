@@ -40,8 +40,8 @@ public class ResourceManagerImpl implements ResourceManager {
 
     @Override
     public void registerAction(Action action) {
-        ActionContext actionMap = DTContext.get(DTContextEnum.ACTION_CONTEXT);
-        actionMap.put(action.getName(), action);
+        ActionContext actionContext = DTContext.get(DTContextEnum.ACTION_CONTEXT);
+        actionContext.put(action.getName(), action);
         actionRepository.insert(action);
     }
 

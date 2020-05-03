@@ -1,8 +1,5 @@
 package cn.blogxin.dt.client.tm;
 
-import cn.blogxin.dt.client.context.ActionContext;
-import cn.blogxin.dt.client.context.DTContext;
-import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.entity.Activity;
@@ -10,6 +7,7 @@ import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
 import cn.blogxin.dt.client.spring.DistributedTransactionProperties;
+import cn.blogxin.dt.client.util.Utils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -50,12 +48,8 @@ public class TransactionManagerImpl implements TransactionManager, ApplicationCo
         }
         try {
             String xid = idGenerator.getId(xidSuffix);
-            DTContext.set(DTContextEnum.XID, xid);
-            Activity activity = initActivity();
-            DTContext.set(DTContextEnum.START_TIME, activity.getStartTime());
-            DTContext.set(DTContextEnum.TIMEOUT_TIME, activity.getTimeoutTime());
-            DTContext.set(DTContextEnum.ACTIVITY, activity);
-            DTContext.set(DTContextEnum.ACTION_CONTEXT, new ActionContext());
+            Activity activity = initActivity(xid);
+            Utils.initDTContext(activity);
             activityRepository.insert(activity);
             activityRepository.updateStatus(activity.getXid(), ActivityStatus.INIT, ActivityStatus.COMMIT);
         } finally {
@@ -63,13 +57,13 @@ public class TransactionManagerImpl implements TransactionManager, ApplicationCo
         }
     }
 
-    private Activity initActivity() {
+    private Activity initActivity(String xid) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime timeoutTime = now.plusSeconds(distributedTransactionProperties.getTimeoutTime());
         LocalDateTime executionTime = timeoutTime.plusMinutes(NumberUtils.INTEGER_ONE);
         Date nowDate = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
         Activity activity = new Activity();
-        activity.setXid(DTContext.get(DTContextEnum.XID));
+        activity.setXid(xid);
         activity.setName(distributedTransactionProperties.getName());
         activity.setStatus(ActivityStatus.INIT.getStatus());
         activity.setStartTime(nowDate);
