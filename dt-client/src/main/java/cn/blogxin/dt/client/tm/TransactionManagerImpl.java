@@ -6,7 +6,7 @@ import cn.blogxin.dt.client.log.entity.Activity;
 import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
-import cn.blogxin.dt.client.spring.DistributedTransactionProperties;
+import cn.blogxin.dt.client.spring.properties.DistributedTransactionProperties;
 import cn.blogxin.dt.client.util.Utils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeansException;

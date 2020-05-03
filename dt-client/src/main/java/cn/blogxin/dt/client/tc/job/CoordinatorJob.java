@@ -1,6 +1,6 @@
-package cn.blogxin.dt.client.job;
+package cn.blogxin.dt.client.tc.job;
 
-import cn.blogxin.dt.client.spring.DistributedTransactionProperties;
+import cn.blogxin.dt.client.spring.properties.DistributedTransactionProperties;
 import cn.blogxin.dt.client.tc.CoordinatorParam;
 import cn.blogxin.dt.client.tc.TransactionCoordinator;
 import com.dangdang.ddframe.job.api.ShardingContext;

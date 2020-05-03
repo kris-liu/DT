@@ -1,4 +1,4 @@
-package cn.blogxin.dt.client.spring;
+package cn.blogxin.dt.client.spring.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

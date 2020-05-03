@@ -4,15 +4,17 @@ import cn.blogxin.dt.client.constant.Constant;
 import cn.blogxin.dt.client.dubbo.DubboActionRegisterApplicationListener;
 import cn.blogxin.dt.client.id.DefaultIdGenerator;
 import cn.blogxin.dt.client.id.IdGenerator;
-import cn.blogxin.dt.client.job.CoordinatorJob;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.log.repository.mybatis.ActionMybatisRepository;
 import cn.blogxin.dt.client.log.repository.mybatis.ActivityMybatisRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
 import cn.blogxin.dt.client.rm.ResourceManagerImpl;
+import cn.blogxin.dt.client.spring.properties.DistributedTransactionProperties;
+import cn.blogxin.dt.client.spring.properties.JobProperties;
 import cn.blogxin.dt.client.tc.TransactionCoordinator;
 import cn.blogxin.dt.client.tc.TransactionCoordinatorImpl;
+import cn.blogxin.dt.client.tc.job.CoordinatorJob;
 import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.dt.client.tm.TransactionManagerImpl;
 import cn.blogxin.dt.client.tm.TwoPhaseTransactionSynchronization;
@@ -44,7 +46,6 @@ public class DistributedTransactionConfiguration {
     @Resource
     private DistributedTransactionProperties distributedTransactionProperties;
 
-
     @Bean
     public ActivityRepository activityRepository() {
         return new ActivityMybatisRepository();
@@ -53,12 +54,6 @@ public class DistributedTransactionConfiguration {
     @Bean
     public ActionRepository actionRepository() {
         return new ActionMybatisRepository();
-    }
-
-    @Bean
-    @ConditionalOnClass(ReferenceAnnotationBeanPostProcessor.class)
-    public DubboActionRegisterApplicationListener dubboActionRegisterApplicationListener() {
-        return new DubboActionRegisterApplicationListener();
     }
 
     @Bean
@@ -79,6 +74,12 @@ public class DistributedTransactionConfiguration {
     @Bean
     public IdGenerator idGenerator() {
         return new DefaultIdGenerator();
+    }
+
+    @Bean
+    @ConditionalOnClass(ReferenceAnnotationBeanPostProcessor.class)
+    public DubboActionRegisterApplicationListener dubboActionRegisterApplicationListener() {
+        return new DubboActionRegisterApplicationListener();
     }
 
     @Bean
@@ -110,4 +111,5 @@ public class DistributedTransactionConfiguration {
     public JobScheduler coordinatorJob(CoordinatorRegistryCenter dtRegCenter, LiteJobConfiguration dtLiteJobConfiguration, CoordinatorJob coordinatorJob) {
         return new SpringJobScheduler(coordinatorJob, dtRegCenter, dtLiteJobConfiguration);
     }
+
 }
