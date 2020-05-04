@@ -4,8 +4,6 @@ import cn.blogxin.dt.client.context.DTContext;
 import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.log.entity.Activity;
-import cn.blogxin.dt.client.log.enums.ActivityStatus;
-import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import org.springframework.transaction.support.TransactionSynchronization;
 
 import javax.annotation.Resource;
@@ -22,10 +20,7 @@ public class TwoPhaseTransactionSynchronization implements TransactionSynchroniz
     @Resource
     private TransactionManager dtTransactionManager;
 
-    @Resource
-    private ActivityRepository activityRepository;
-
-  @Override
+    @Override
     public void beforeCommit(boolean readOnly) {
         if (!DTContext.inTransaction()) {
             return;
@@ -42,10 +37,9 @@ public class TwoPhaseTransactionSynchronization implements TransactionSynchroniz
             return;
         }
         try {
-            Activity activity = activityRepository.queryForUpdate(DTContext.get(DTContextEnum.XID));
-            if (status == TransactionSynchronization.STATUS_COMMITTED && ActivityStatus.COMMIT.getStatus() == activity.getStatus()) {
+            if (status == TransactionSynchronization.STATUS_COMMITTED) {
                 dtTransactionManager.commit();
-            } else if (status == TransactionSynchronization.STATUS_ROLLED_BACK && ActivityStatus.INIT.getStatus() == activity.getStatus()) {
+            } else if (status == TransactionSynchronization.STATUS_ROLLED_BACK) {
                 dtTransactionManager.rollback();
             }
         } finally {
