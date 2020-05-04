@@ -17,46 +17,46 @@
 
     <select id="queryForUpdate" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-          <include refid="baseColumnList"/>
+        <include refid="baseColumnList"/>
         FROM
-          coupon
+        coupon
         WHERE
-          uid = #{uid} and coupon_id = #{couponId} FOR UPDATE
+        uid = #{uid} and coupon_id = #{couponId} FOR UPDATE
     </select>
 
     <insert id="insert">
         INSERT INTO
-          coupon
-          (uid,coupon_id,status)
+        coupon
+        (uid,coupon_id,status)
         VALUES
-          (#{uid}, #{coupon_id}, #{status})
+        (#{uid}, #{coupon_id}, #{status})
     </insert>
 
     <update id="freeze">
         UPDATE
-          coupon
+        coupon
         SET
-          status = #{status}, order_id = #{orderId}
+        status = #{status}, order_id = #{orderId}
         WHERE
-          uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus}
+        uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus}
     </update>
 
     <update id="commit">
         UPDATE
-          coupon
+        coupon
         SET
-          status = #{status}
+        status = #{status}
         WHERE
-          uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus} and order_id = #{orderId}
+        uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus} and order_id = #{orderId}
     </update>
 
     <update id="unfreeze">
         UPDATE
-          coupon
+        coupon
         SET
-          status = #{status}
+        status = #{status}
         WHERE
-          uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus} and order_id = #{orderId}
+        uid = #{uid} and coupon_id = #{couponId} and status = #{currentStatus} and order_id = #{orderId}
     </update>
 
 </mapper>

@@ -75,9 +75,9 @@ public class Utils {
         result.add(dtParam);
         Class<?>[] parameterTypes = method.getParameterTypes();
         JSONArray jsonArray = JSONArray.parseArray(arguments);
-        for (int i = 0; i < jsonArray.size() ; i ++) {
+        for (int i = 0; i < jsonArray.size(); i++) {
             Class<?> parameterType = parameterTypes[i + 1];
-            Object param =  jsonArray.getObject(i, parameterType);
+            Object param = jsonArray.getObject(i, parameterType);
             result.add(param);
         }
         return result.toArray();

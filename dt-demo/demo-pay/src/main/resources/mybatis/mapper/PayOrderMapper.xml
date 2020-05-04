@@ -16,19 +16,19 @@
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-          <include refid="baseColumnList"/>
+        <include refid="baseColumnList"/>
         FROM
-          pay_order
+        pay_order
         WHERE
-          uid = #{uid} and order_id = #{orderId}
+        uid = #{uid} and order_id = #{orderId}
     </select>
 
     <insert id="insert">
         INSERT INTO
-          pay_order
-          (uid,order_id,status,amount)
+        pay_order
+        (uid,order_id,status,amount)
         VALUES
-          (#{uid}, #{orderId}, #{status}, #{amount})
+        (#{uid}, #{orderId}, #{status}, #{amount})
     </insert>
 
 </mapper>

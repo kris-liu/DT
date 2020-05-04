@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 协调器参数
+ *
  * @author kris
  */
 @Data

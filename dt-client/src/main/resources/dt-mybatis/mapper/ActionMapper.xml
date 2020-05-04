@@ -18,10 +18,10 @@
 
     <insert id="insert">
         INSERT INTO
-          dt.action
-          (xid, name, status, arguments, gmt_create, gmt_modified)
+        dt.action
+        (xid, name, status, arguments, gmt_create, gmt_modified)
         VALUES
-          (#{xid}, #{name}, #{status}, #{arguments}, #{gmtCreate}, #{gmtModified})
+        (#{xid}, #{name}, #{status}, #{arguments}, #{gmtCreate}, #{gmtModified})
     </insert>
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">

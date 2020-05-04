@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("cn.blogxin.coupon.mapper")
 public class DemoCouponApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoCouponApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoCouponApplication.class, args);
+    }
 
 }

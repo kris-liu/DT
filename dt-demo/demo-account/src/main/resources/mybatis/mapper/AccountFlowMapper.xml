@@ -25,19 +25,19 @@
 
     <insert id="insert">
         INSERT INTO
-          account_flow
-          (uid,order_id,status,amount)
+        account_flow
+        (uid,order_id,status,amount)
         VALUES
-          (#{uid}, #{orderId}, #{status}, #{amount})
+        (#{uid}, #{orderId}, #{status}, #{amount})
     </insert>
 
     <update id="updateStatus">
         UPDATE
-          account_flow
+        account_flow
         SET
-          status = #{status}
+        status = #{status}
         WHERE
-          uid = #{uid} and order_id = #{orderId} and status = #{currentStatus}
+        uid = #{uid} and order_id = #{orderId} and status = #{currentStatus}
     </update>
 
 </mapper>

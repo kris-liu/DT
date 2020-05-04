@@ -22,6 +22,7 @@ public final class DTContext {
 
     /**
      * 是否在分布式事务环境中
+     *
      * @return
      */
     public static boolean inTransaction() {

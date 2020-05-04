@@ -19,6 +19,7 @@ import java.util.Collection;
 /**
  * 注册Dubbo类型的Action
  * dubbo的@Reference注解引入的依赖无法在BeanPostProcessor获取到，需要通过监听器在容器启动前获取并注册
+ *
  * @author kris
  */
 public class DubboActionRegisterApplicationListener implements ApplicationListener, Ordered {

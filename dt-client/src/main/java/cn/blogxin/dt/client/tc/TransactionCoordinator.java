@@ -10,6 +10,7 @@ public interface TransactionCoordinator {
 
     /**
      * 对二阶段提交失败的事务进行批量补偿
+     *
      * @param param CoordinatorParam
      */
     void batchReTry(CoordinatorParam param);

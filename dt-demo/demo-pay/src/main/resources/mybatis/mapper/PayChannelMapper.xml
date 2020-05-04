@@ -18,17 +18,17 @@
 
     <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
-          <include refid="baseColumnList"/>
+        <include refid="baseColumnList"/>
         FROM
-          pay_channel
+        pay_channel
         WHERE
-          uid = #{uid} and order_id = #{orderId}
+        uid = #{uid} and order_id = #{orderId}
     </select>
 
     <insert id="insert">
         INSERT INTO
-          pay_channel
-          (uid,order_id,channel_id,status,amount,asset_id)
+        pay_channel
+        (uid,order_id,channel_id,status,amount,asset_id)
         VALUES
         <foreach collection="channels" item="item" index="index" separator=",">
             (#{item.uid},
