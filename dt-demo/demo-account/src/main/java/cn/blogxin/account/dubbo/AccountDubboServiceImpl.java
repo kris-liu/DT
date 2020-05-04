@@ -22,6 +22,7 @@ public class AccountDubboServiceImpl implements AccountDubboService {
 
     @Override
     public boolean freeze(AccountDTO accountDTO) {
+        log.info("access AccountDubboService freeze accountDTO:{}", accountDTO);
         try {
             return accountService.freeze(accountDTO);
         } catch (Exception e) {
@@ -32,14 +33,14 @@ public class AccountDubboServiceImpl implements AccountDubboService {
 
     @Override
     public void commit(DTParam dtParam, AccountDTO accountDTO) {
-        log.info("access CouponDubboService commit dtParam:{}, accountDTO:{}", dtParam, accountDTO);
+        log.info("access AccountDubboService commit dtParam:{}, accountDTO:{}", dtParam, accountDTO);
         accountService.commit(accountDTO);
 
     }
 
     @Override
     public void unfreeze(DTParam dtParam, AccountDTO accountDTO) {
-        log.info("access CouponDubboService unfreeze dtParam:{}, accountDTO:{}", dtParam, accountDTO);
+        log.info("access AccountDubboService unfreeze dtParam:{}, accountDTO:{}", dtParam, accountDTO);
         accountService.unfreeze(accountDTO);
     }
 }

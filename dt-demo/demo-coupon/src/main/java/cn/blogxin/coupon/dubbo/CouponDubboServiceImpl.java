@@ -21,6 +21,7 @@ public class CouponDubboServiceImpl implements CouponDubboService {
 
     @Override
     public boolean freeze(CouponDTO couponDTO) {
+        log.info("access CouponDubboService freeze couponDTO:{}", couponDTO);
         try {
             return couponService.freeze(couponDTO);
         } catch (Exception e) {

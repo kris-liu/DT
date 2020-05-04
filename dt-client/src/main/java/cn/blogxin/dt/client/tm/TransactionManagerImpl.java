@@ -1,5 +1,6 @@
 package cn.blogxin.dt.client.tm;
 
+import cn.blogxin.dt.client.constant.Constant;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.entity.Activity;
@@ -60,7 +61,7 @@ public class TransactionManagerImpl implements TransactionManager, ApplicationCo
     private Activity initActivity(String xid) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime timeoutTime = now.plusSeconds(distributedTransactionProperties.getTimeoutTime());
-        LocalDateTime executionTime = timeoutTime.plusMinutes(NumberUtils.INTEGER_ONE);
+        LocalDateTime executionTime = timeoutTime.plusSeconds(Constant.TIMEOUT_RETRY_EXECUTION_TIME);
         Date nowDate = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
         Activity activity = new Activity();
         activity.setXid(xid);

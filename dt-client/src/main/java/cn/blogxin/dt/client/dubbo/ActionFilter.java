@@ -48,6 +48,10 @@ public class ActionFilter implements Filter {
                 ExtensionFactory objectFactory = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension();
                 ResourceManager resourceManager = objectFactory.getExtension(ResourceManager.class, "dtResourceManager");
                 resourceManager.registerAction(action);
+                //todo test
+//                if (serviceName.contains("Coupon")) {
+//                    int i = 10/0;
+//                }
             }
         } catch (Exception e) {
             log.error("ActionFilter error", e);

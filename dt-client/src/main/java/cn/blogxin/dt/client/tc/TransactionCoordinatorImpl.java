@@ -59,7 +59,7 @@ public class TransactionCoordinatorImpl implements TransactionCoordinator {
             ActionContext actionContext = DTContext.get(DTContextEnum.ACTION_CONTEXT);
             List<Action> actions = actionRepository.query(activity.getXid());
             for (Action action : actions) {
-                if (ActionStatus.INIT.getStatus() != action.getStatus()) {
+                if (ActionStatus.INIT.getStatus() == action.getStatus()) {
                     actionContext.put(action.getName(), action);
                 }
             }
