@@ -7,9 +7,8 @@ import cn.blogxin.pay.entity.PayRequest;
 import cn.blogxin.pay.enums.PayStatus;
 import cn.blogxin.pay.service.PayService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +22,8 @@ import java.util.List;
  * @author kris
  */
 @Controller
+@Slf4j
 public class PayController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(PayController.class);
 
     @Resource
     private PayService payService;
@@ -38,7 +36,7 @@ public class PayController {
             List<PayChannel> channels = buildChannels(payRequest);
             return payService.accountAndCouponPay(order, channels);
         } catch (Exception e) {
-            LOGGER.error("accountAndCouponPay error", e);
+            log.error("accountAndCouponPay error", e);
             return false;
         }
     }

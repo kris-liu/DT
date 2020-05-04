@@ -108,7 +108,7 @@ public class DistributedTransactionConfiguration {
     }
 
     @Bean(initMethod = "init")
-    public JobScheduler coordinatorJob(CoordinatorRegistryCenter dtRegCenter, LiteJobConfiguration dtLiteJobConfiguration, CoordinatorJob coordinatorJob) {
+    public JobScheduler dtScheduler(CoordinatorRegistryCenter dtRegCenter, LiteJobConfiguration dtLiteJobConfiguration, CoordinatorJob coordinatorJob) {
         return new SpringJobScheduler(coordinatorJob, dtRegCenter, dtLiteJobConfiguration);
     }
 

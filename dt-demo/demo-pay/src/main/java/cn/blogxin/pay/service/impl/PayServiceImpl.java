@@ -50,7 +50,6 @@ public class PayServiceImpl implements PayService {
         payOrderMapper.insert(payOrder);
         payChannelMapper.insert(channels);
         Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
-        int i = 10/0;
         Preconditions.checkArgument(couponDubboService.freeze(couponDTO), "券冻结失败");
         return true;
     }

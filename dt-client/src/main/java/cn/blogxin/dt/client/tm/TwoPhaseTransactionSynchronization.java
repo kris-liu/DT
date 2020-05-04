@@ -31,7 +31,7 @@ public class TwoPhaseTransactionSynchronization implements TransactionSynchroniz
             return;
         }
         Activity activity = DTContext.get(DTContextEnum.ACTIVITY);
-        if (new Date().before(activity.getTimeoutTime())) {
+        if (activity.getTimeoutTime().before(new Date())) {
             throw new DTException("分布式事务提交超时");
         }
     }

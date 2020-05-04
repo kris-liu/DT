@@ -55,7 +55,7 @@
         xid = #{xid} and status = #{fromStatus}
     </update>
 
-    <select id="queryUnfinished" parameterType="java.lang.String" resultMap="baseResultMap">
+    <select id="queryUnfinished" resultMap="baseResultMap">
         SELECT
         <include refid="baseColumnList"/>
         FROM

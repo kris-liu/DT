@@ -32,7 +32,7 @@ public class Utils {
     }
 
     public static ActivityStatus getFinalStatus(Activity activity) {
-        if (ActivityStatus.INIT.getStatus() == activity.getStatus() && activity.getTimeoutTime().after(new Date())) {
+        if (ActivityStatus.INIT.getStatus() == activity.getStatus() && activity.getTimeoutTime().before(new Date())) {
             return ActivityStatus.ROLLBACK;
         } else if (ActivityStatus.COMMIT.getStatus() == activity.getStatus()) {
             return ActivityStatus.COMMIT_FINISH;

@@ -13,7 +13,7 @@ create table activity (
    `gmt_create` DATETIME NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '事务创建时间',
    `gmt_modified` DATETIME NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '事务更新时间',
    PRIMARY KEY (`id`),
-   UNIQUE KEY `uk_xid` (`xid`)
+   UNIQUE KEY `uk_xid` (`xid`),
    KEY `idx_execution_time_status` (`execution_time`, `status`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='主事务记录表';
 
