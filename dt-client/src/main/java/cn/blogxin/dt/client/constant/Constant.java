@@ -20,6 +20,6 @@ public interface Constant {
     /**
      * 超时后重试的间隔时间
      */
-    int TIMEOUT_RETRY_EXECUTION_TIME = 10;
+    int TIMEOUT_RETRY_EXECUTION_TIME = 30;
 
 }
