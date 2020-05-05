@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 主事务记录操作
+ *
  * @author kris
  */
 public interface ActivityRepository {

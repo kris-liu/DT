@@ -6,6 +6,8 @@ import cn.blogxin.dt.client.log.enums.ActionStatus;
 import java.util.List;
 
 /**
+ * 分支事务记录操作
+ *
  * @author kris
  */
 public interface ActionRepository {
