@@ -9,8 +9,9 @@ import cn.blogxin.dt.client.log.enums.ActionStatus;
 import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
 import cn.blogxin.dt.client.log.repository.ActivityRepository;
-import cn.blogxin.dt.client.rm.ResourceManager;
+import cn.blogxin.dt.client.tm.TransactionManager;
 import cn.blogxin.dt.client.util.Utils;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 import java.time.Instant;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * @author kris
  */
+@Slf4j
 public class TransactionCoordinatorImpl implements TransactionCoordinator {
 
     @Resource
@@ -31,7 +33,7 @@ public class TransactionCoordinatorImpl implements TransactionCoordinator {
     private ActionRepository actionRepository;
 
     @Resource
-    private ResourceManager dtResourceManager;
+    private TransactionManager dtTransactionManager;
 
     @Override
     public void batchReTry(CoordinatorParam param) {
@@ -65,9 +67,9 @@ public class TransactionCoordinatorImpl implements TransactionCoordinator {
                 }
             }
             if (ActivityStatus.COMMIT_FINISH == activityStatus) {
-                result = dtResourceManager.commitAction();
+                result = dtTransactionManager.commit();
             } else if (ActivityStatus.ROLLBACK == activityStatus) {
-                result = dtResourceManager.rollbackAction();
+                result = dtTransactionManager.rollback();
             }
         } finally {
             DTContext.clear();

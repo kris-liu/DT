@@ -6,11 +6,8 @@ import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.context.DTParam;
 import cn.blogxin.dt.client.log.entity.Action;
 import cn.blogxin.dt.client.log.enums.ActionStatus;
-import cn.blogxin.dt.client.log.enums.ActivityStatus;
 import cn.blogxin.dt.client.log.repository.ActionRepository;
-import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.util.Utils;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
@@ -31,9 +28,6 @@ public class ResourceManagerImpl implements ResourceManager {
     @Resource
     private ActionRepository actionRepository;
 
-    @Resource
-    private ActivityRepository activityRepository;
-
     @Override
     public void registerResource(ActionResource resource) {
         RESOURCES.put(resource.getActionName(), resource);
@@ -51,32 +45,12 @@ public class ResourceManagerImpl implements ResourceManager {
 
     @Override
     public boolean commitAction() {
-        boolean result;
-        try {
-            Preconditions.checkArgument(doAction(ActionStatus.COMMIT), "执行分布式事务二阶段提交失败");
-            activityRepository.updateStatus(DTContext.get(DTContextEnum.XID), ActivityStatus.COMMIT, ActivityStatus.COMMIT_FINISH);
-            result = true;
-            log.info("执行分布式事务二阶段提交成功。xid={}", (String) DTContext.get(DTContextEnum.XID));
-        } catch (Exception e) {
-            result = false;
-            log.error("执行分布式事务二阶段提交失败，等待重试。xid={}", DTContext.get(DTContextEnum.XID), e);
-        }
-        return result;
+        return doAction(ActionStatus.COMMIT);
     }
 
     @Override
     public boolean rollbackAction() {
-        boolean result;
-        try {
-            Preconditions.checkArgument(doAction(ActionStatus.ROLLBACK), "执行分布式事务二阶段回滚失败");
-            activityRepository.updateStatus(DTContext.get(DTContextEnum.XID), ActivityStatus.INIT, ActivityStatus.ROLLBACK);
-            result = true;
-            log.info("执行分布式事务二阶段回滚成功。xid={}", (String) DTContext.get(DTContextEnum.XID));
-        } catch (Exception e) {
-            result = false;
-            log.error("执行分布式事务二阶段回滚失败，等待重试。xid={}", DTContext.get(DTContextEnum.XID), e);
-        }
-        return result;
+        return doAction(ActionStatus.ROLLBACK);
     }
 
     private boolean doAction(ActionStatus actionStatus) {

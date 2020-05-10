@@ -1,6 +1,8 @@
 package cn.blogxin.dt.client.tm;
 
 import cn.blogxin.dt.client.constant.Constant;
+import cn.blogxin.dt.client.context.DTContext;
+import cn.blogxin.dt.client.context.DTContextEnum;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.id.IdGenerator;
 import cn.blogxin.dt.client.log.entity.Activity;
@@ -9,6 +11,7 @@ import cn.blogxin.dt.client.log.repository.ActivityRepository;
 import cn.blogxin.dt.client.rm.ResourceManager;
 import cn.blogxin.dt.client.spring.properties.DistributedTransactionProperties;
 import cn.blogxin.dt.client.util.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +26,7 @@ import java.util.Date;
 /**
  * @author kris
  */
+@Slf4j
 public class TransactionManagerImpl implements TransactionManager, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -78,12 +82,36 @@ public class TransactionManagerImpl implements TransactionManager, ApplicationCo
 
     @Override
     public boolean commit() {
-        return dtResourceManager.commitAction();
+        try {
+            boolean commitAction = dtResourceManager.commitAction();
+            if (commitAction) {
+                activityRepository.updateStatus(DTContext.get(DTContextEnum.XID), ActivityStatus.COMMIT, ActivityStatus.COMMIT_FINISH);
+                log.info("执行分布式事务二阶段提交成功。xid={}", (String) DTContext.get(DTContextEnum.XID));
+                return true;
+            }
+        } catch (Exception e) {
+            log.error("执行分布式事务二阶段提交异常，等待重试。xid={}", DTContext.get(DTContextEnum.XID), e);
+            return false;
+        }
+        log.warn("执行分布式事务二阶段提交失败，等待重试。xid={}", (String) DTContext.get(DTContextEnum.XID));
+        return false;
     }
 
     @Override
     public boolean rollback() {
-        return dtResourceManager.rollbackAction();
+        try {
+            boolean rollbackAction = dtResourceManager.rollbackAction();
+            if (rollbackAction) {
+                activityRepository.updateStatus(DTContext.get(DTContextEnum.XID), ActivityStatus.INIT, ActivityStatus.ROLLBACK);
+                log.info("执行分布式事务二阶段回滚成功。xid={}", (String) DTContext.get(DTContextEnum.XID));
+                return true;
+            }
+        } catch (Exception e) {
+            log.error("执行分布式事务二阶段回滚异常，等待重试。xid={}", DTContext.get(DTContextEnum.XID), e);
+            return false;
+        }
+        log.warn("执行分布式事务二阶段回滚失败，等待重试。xid={}", (String) DTContext.get(DTContextEnum.XID));
+        return false;
     }
 
 
