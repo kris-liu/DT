@@ -12,4 +12,11 @@
     <artifactId>demo-common</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.blogxin</groupId>
+            <artifactId>dt-client-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>

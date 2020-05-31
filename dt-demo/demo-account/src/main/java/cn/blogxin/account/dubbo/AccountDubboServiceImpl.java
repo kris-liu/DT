@@ -3,7 +3,7 @@ package cn.blogxin.account.dubbo;
 import cn.blogxin.account.service.AccountService;
 import cn.blogxin.common.account.dto.AccountDTO;
 import cn.blogxin.common.account.service.AccountDubboService;
-import cn.blogxin.dt.client.context.DTParam;
+import cn.blogxin.dt.api.context.DTParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 

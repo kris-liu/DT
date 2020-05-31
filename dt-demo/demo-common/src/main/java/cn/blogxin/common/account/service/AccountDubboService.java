@@ -1,8 +1,8 @@
 package cn.blogxin.common.account.service;
 
 import cn.blogxin.common.account.dto.AccountDTO;
-import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
-import cn.blogxin.dt.client.context.DTParam;
+import cn.blogxin.dt.api.annotation.TwoPhaseCommit;
+import cn.blogxin.dt.api.context.DTParam;
 
 /**
  * @author kris

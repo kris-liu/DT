@@ -1,10 +1,10 @@
 package cn.blogxin.dt.client.util;
 
-import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
+import cn.blogxin.dt.api.annotation.TwoPhaseCommit;
+import cn.blogxin.dt.api.context.DTParam;
 import cn.blogxin.dt.client.context.ActionContext;
 import cn.blogxin.dt.client.context.DTContext;
 import cn.blogxin.dt.client.context.DTContextEnum;
-import cn.blogxin.dt.client.context.DTParam;
 import cn.blogxin.dt.client.exception.DTException;
 import cn.blogxin.dt.client.log.entity.Activity;
 import cn.blogxin.dt.client.log.enums.ActionStatus;

@@ -28,8 +28,8 @@ public class DistributedTransactionProperties {
     private long timeoutTime = 30;
 
     /**
-     * ElasticJob属性配置
+     * ID生成器
      */
-    private JobProperties job;
+    private String idGeneratorClass;
 
 }

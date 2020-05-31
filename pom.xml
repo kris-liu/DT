@@ -14,8 +14,13 @@
     <url>https://github.com/kris-liu/DT</url>
 
     <modules>
-        <module>dt-admin</module>
+        <module>dt-all</module>
+        <module>dt-client-api</module>
         <module>dt-client</module>
+        <module>dt-repository-mybatis</module>
+        <module>dt-rpc-dubbo-annotation</module>
+        <module>dt-scheduler-elastic-job</module>
+        <module>dt-admin</module>
         <module>dt-demo</module>
     </modules>
 

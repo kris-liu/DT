@@ -1,8 +1,8 @@
 package cn.blogxin.common.coupon.service;
 
 import cn.blogxin.common.coupon.dto.CouponDTO;
-import cn.blogxin.dt.client.annotation.TwoPhaseCommit;
-import cn.blogxin.dt.client.context.DTParam;
+import cn.blogxin.dt.api.annotation.TwoPhaseCommit;
+import cn.blogxin.dt.api.context.DTParam;
 
 /**
  * @author kris

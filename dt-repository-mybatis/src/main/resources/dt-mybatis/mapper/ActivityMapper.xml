@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.blogxin.dt.log.repository.mybatis.mapper.ActivityMapper">
+
+    <resultMap id="baseResultMap" type="cn.blogxin.dt.client.log.entity.Activity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="xid" property="xid" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="start_time" property="startTime"/>
+        <result column="timeout_time" property="timeoutTime"/>
+        <result column="execution_time" property="executionTime"/>
+        <result column="retry_count" property="retryCount" jdbcType="TINYINT"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id, xid, name, status, start_time, timeout_time, execution_time, retry_count, gmt_create, gmt_modified
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO
+          dt.activity
+          (xid, name, status, start_time, timeout_time, execution_time, retry_count, gmt_create, gmt_modified)
+        VALUES
+          (#{xid}, #{name}, #{status}, #{startTime}, #{timeoutTime}, #{executionTime}, #{retryCount}, #{gmtCreate}, #{gmtModified})
+    </insert>
+
+    <select id="query" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        dt.activity
+        WHERE
+        xid = #{xid}
+    </select>
+
+    <select id="queryForUpdate" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        dt.activity
+        WHERE
+        xid = #{xid}
+        FOR UPDATE
+    </select>
+
+    <update id="updateStatus">
+        UPDATE
+        dt.activity
+        SET
+        status = #{toStatus}, gmt_modified = NOW()
+        WHERE
+        xid = #{xid} and status = #{fromStatus}
+    </update>
+
+    <select id="queryUnfinished" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM
+        dt.activity
+        WHERE
+        <![CDATA[
+          execution_time < #{executionTime} and status in (0, 1)
+        ]]>
+        LIMIT #{limit}
+    </select>
+
+    <update id="updateRetry">
+        update
+        dt.activity
+        set
+        retry_count = #{retryCount}, execution_time = #{executeTime}, gmt_modified = NOW()
+        WHERE
+        xid = #{xid} and status = #{fromStatus}
+    </update>
+
+</mapper>

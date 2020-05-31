@@ -3,7 +3,7 @@ package cn.blogxin.coupon.dubbo;
 import cn.blogxin.common.coupon.dto.CouponDTO;
 import cn.blogxin.common.coupon.service.CouponDubboService;
 import cn.blogxin.coupon.service.CouponService;
-import cn.blogxin.dt.client.context.DTParam;
+import cn.blogxin.dt.api.context.DTParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 
