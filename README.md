@@ -2,7 +2,7 @@
 Distributed Transaction Framework
 
 
-使用教程
+## 使用教程
 
 
 ### 从业务服务
@@ -85,10 +85,10 @@ dt.job.namespace=pay_test_job	//job的zk路径namespace
     }
 ```
 
-引入`TransactionManager`，在`Transactional`本地事务中，需要执行`dtTransactionManager.start();`开启分布式事务。
+引入`TransactionManager`，在`@Transactional`本地事务中，需要执行`dtTransactionManager.start();`开启分布式事务。
 
 
-### DEMO
+### 使用DEMO
 
 使用DT分布式事务组件的demo： https://github.com/kris-liu/DT/tree/master/dt-demo
 
