@@ -47,6 +47,11 @@ public class TransactionManagerImpl implements TransactionManager, ApplicationCo
     private TwoPhaseTransactionSynchronization twoPhaseTransactionSynchronization;
 
     @Override
+    public void start() {
+        start(null);
+    }
+
+    @Override
     public void start(String xidSuffix) {
         if (!TransactionSynchronizationManager.isActualTransactionActive()) {
             throw new DTException("分布式事务需要在一个本地事务环境中开启");

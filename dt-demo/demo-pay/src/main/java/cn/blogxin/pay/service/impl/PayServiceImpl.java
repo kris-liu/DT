@@ -46,7 +46,7 @@ public class PayServiceImpl implements PayService {
     public boolean accountAndCouponPay(PayOrder payOrder, List<PayChannel> channels) {
         AccountDTO accountDTO = buildAccountDTO(payOrder, channels);
         CouponDTO couponDTO = buildCouponDTO(payOrder, channels);
-        dtTransactionManager.start(null);
+        dtTransactionManager.start();
         payOrderMapper.insert(payOrder);
         payChannelMapper.insert(channels);
         Preconditions.checkArgument(accountDubboService.freeze(accountDTO), "余额冻结失败");
