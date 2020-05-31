@@ -5,7 +5,7 @@ Distributed Transaction Framework
 使用教程
 
 
-### 分支事务提供方
+### 从业务服务
 
 #### POM引入
 
@@ -35,7 +35,7 @@ public interface AccountDubboService {
 接口的一阶段方法上添加二阶段提交注解`@TwoPhaseCommit`，设置分支事务名称以及对应的`confirmMethod`和`cancelMethod`方法名称，`confirmMethod`和`cancelMethod`方法第一个参数设置为`DTParam`，包含了分布式事务ID以及事务开始时间等分布式事务上下文信息，后面的参数与一阶段方法参数相同，二阶段方法调用时会将一阶段的参数重新传进来。
 
 
-### 分布式事务发起方
+### 主业务服务
 
 #### POM引入
 
@@ -76,7 +76,7 @@ dt.job.namespace=pay_test_job	//job的zk路径namespace
     @Resource
     private TransactionManager dtTransactionManager;
 
-		@Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public boolean execute(Xxx xxx) {
         dtTransactionManager.start();
       	//执行本地事务
@@ -95,8 +95,10 @@ dt.job.namespace=pay_test_job	//job的zk路径namespace
 1. 执行初始化SQL并初始化数据：https://github.com/kris-liu/DT/blob/master/dt-demo/sql/init.sql
 2. 启动`DemoAccountApplication`，`DemoCouponApplication`两个分支事务提供方。
 3. 启动`DemoPayApplication`分布式事务发起方，实现了一个同时使用余额和券两种渠道组合支付的接口demo。
-4. 请求接口http://127.0.0.1:8082/pay，参数：{"uid":"000001","orderId":"ORDER000002","amount":"200","channels":[{"channelId":"10","amount":"100","assetsId":""},{"channelId":"11","amount":"100","assetId":"COUPON000001"}]}
-5. 可以在分布式事务执行过程中的各个环节模拟异常，观察分布式事务会通过补偿达到最终一致。
+4. 请求测试接口http://127.0.0.1:8082/pay
+5. 参数：{"uid":"000001","orderId":"ORDER000002","amount":"200","channels":[{"channelId":"10","amount":"100","assetsId":""},{"channelId":"11","amount":"100","assetId":"COUPON000001"}]}
+6. 可以在分布式事务执行过程中的各个环节模拟异常，观察分布式事务会通过补偿达到最终一致。
+
 
 
 
