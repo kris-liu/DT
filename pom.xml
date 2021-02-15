@@ -30,7 +30,7 @@
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
         <org.slf4j.version>1.7.25</org.slf4j.version>
         <logback.version>1.2.3</logback.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <guava.version>19.0</guava.version>
         <joda-time.version>2.9.9</joda-time.version>
         <commons-lang.version>2.6</commons-lang.version>
